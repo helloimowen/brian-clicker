@@ -5,16 +5,12 @@ var frameCount = 0; // globals are good.
 var element = document.getElementById("papersGraded");
 var element2 = document.getElementById("papersToGrade");
 var element3 = document.getElementById("dying");
-var seasonDom = document.getElementById("dying");
+var seasonDom = document.getElementById("season");
 
 //import seasons from 'seasons.js'; // or './module'
 //let seasons = seasons(); // val is "Hello";
-
-var seasonsENUM = {"fall":1, "winter":2, "spring":3, "summer":4};
-
+var currentSeason;
 const days = 365; 
-var seasonsENUM = {"fall":1, "winter":2, "spring":3, "summer":4};
-var currentSeason; 
 //fall semester = first 100 days. 
 //winter break = 65 days. 
     //sort of like stardew valley. You can't do much. 
@@ -25,16 +21,16 @@ var currentSeason;
     //Students work on making barbeque sauce. Students fall in vats of barbeque sauce. 
 
     
-//class seasons
-//{
-    //constructor(){
-        //days = 365;
-       // currentSeason = seasonsENUM.fall;
-   // }
+class seasons
+{
+    constructor(){
+        days = 365;
+        currentSeason = seasonsENUM.fall;
+    }
 
 
 
-    checkSeason(frame){
+    static checkSeason(frame){
 
         frame = frame % days; 
 
@@ -42,24 +38,24 @@ var currentSeason;
 
         if (frame <= 100) // increment a day every three seconds. 
         {       // This changes the season around... every five minutes. 
-            currentSeason = seasonsENUM.fall;
+            currentSeason = "fall";
         }
         else if  (frame > 100 && frame <= 165)
         {
-            currentSeason = seasonsENUM.winter;
+            currentSeason = "winter";
         }
         else if (frame > 165 && frame <= 265)
         {
-            currentSeason = seasonsENUM.spring;
+            currentSeason = "spring";
         }
         else
         {
-            currentSeason = seasonsENUM.summer;
+            currentSeason = "summer";
         }
 
-        return 
+        return currentSeason;
     } 
-//}
+}
 
 
 function grade()
@@ -102,8 +98,8 @@ function loop()
             calculatePapers();
         }
 
-        setDOM( seasonDom, "It is currently the" + seasons.checkSeasons() );
-
+        setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount) + ". Day " + Math.floor(frameCount / 90) );
+ 
 
 
 
