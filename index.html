@@ -7,15 +7,28 @@
   <meta name="author" content="Our great team">
   <meta name="description" content="Brian Hall clicker?">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  .button{
+    border: none;
+    background-color: #FF851B;
+    padding: 16px 32px;
 
+  }
+  </style>
 </head>
 
+
 <body>
-  <p id="season"></p>
+
+
+  <p id="season">It is currently the Fall. Sunday - Day 1.</p>
+  <p id ="money">Brian has $0.</p>
   <p id="papersToGrade">Brian has 0 assignments to grade.</p>
   <p id="papersGraded">Brian has graded 0 assignments.</p>
 
-  <p id="dying"></p>
+  <p id="story"></p>
+
+
 
   <script src="js/script.js">
   </script>
@@ -25,7 +38,7 @@
     loop();
 	</script>
 
-  <button onclick="grade();">Grade.</button>
+  <button class = "button" onclick="grade();">Grade.</button>
 
 </body>
 

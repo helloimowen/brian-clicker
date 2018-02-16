@@ -4,8 +4,11 @@ var frameCount = 0; // globals are good.
 
 var element = document.getElementById("papersGraded");
 var element2 = document.getElementById("papersToGrade");
-var element3 = document.getElementById("dying");
+var element3 = document.getElementById("story");
 var seasonDom = document.getElementById("season");
+
+var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
 
 //import seasons from 'seasons.js'; // or './module'
 //let seasons = seasons(); // val is "Hello";
@@ -18,7 +21,12 @@ const days = 365;
     // new students. More 
 //summer break = 105 days. 
     //brian begins making BBQ sauce. grading is replaced with barbeque sauce making. 
-    //Students work on making barbeque sauce. Students fall in vats of barbeque sauce. 
+    //Students work on making barbeque sauce. Students fall in vats of barbeque sauce.
+
+
+var money = 0;  
+
+var salary = 49000; // The very low end of a computer engineering salary. 
 
     
 class seasons
@@ -38,23 +46,28 @@ class seasons
 
         if (frame <= 100) // increment a day every three seconds. 
         {       // This changes the season around... every five minutes. 
-            currentSeason = "fall";
+            currentSeason = "Fall";
         }
         else if  (frame > 100 && frame <= 165)
         {
-            currentSeason = "winter";
+            currentSeason = "Winter";
         }
         else if (frame > 165 && frame <= 265)
         {
-            currentSeason = "spring";
+            currentSeason = "Spring";
         }
         else
         {
-            currentSeason = "summer";
+            currentSeason = "Summer";
         }
 
         return currentSeason;
     } 
+
+    static checkDay(frame)
+    {
+        return daysOfTheWeek[frame];
+    }
 }
 
 
@@ -76,7 +89,7 @@ function grade()
         papersToGrade--; 
     }
 
-    dying();
+    story();
 
     calculatePapers();
 } 
@@ -98,10 +111,13 @@ function loop()
             calculatePapers();
         }
 
-        setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount) + ". Day " + Math.floor(frameCount / 90) );
+        if (frameCount % 90 == 0)
+            setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
  
-
-
+        if ( seasons.checkDay(frameCount / 90) == "Thursday")
+            {
+                money += Math.floor(salary / 52);
+            }
 
     }, (1000 / 30));
 }
@@ -122,12 +138,18 @@ function calculatePapers()
 
 }
 
-function dying()
+function story()
 {
-    if (papersGraded > 20)
-    {
-        setDOM(element3, "Bryan doesn't want to grade anymore papers. But he can't hire anyone because this game is not finished.")
-    }
+
+    if (papersGraded < 20)
+        setDOM(element3, "You are Brian R Hall, a new professor at Champlain College. It is your job to grade everyone's assignments.")
+
+    else if (papersGraded > 20 && papersGraded < 40)
+        setDOM(element3, "Brian doesn't want to grade anymore Assignments.")
+
+    else if(papersGraded > 100)
+        setDOM(element3, "Brian begins to look for help.")
+    
 }
 
 
