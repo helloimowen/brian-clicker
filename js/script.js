@@ -3,6 +3,7 @@ var papersGraded = 0;
 var frameCount = 0; // globals are good. 
 
 var element = document.getElementById("papersGraded");
+var salaryDom = document.getElementById("money");
 var element2 = document.getElementById("papersToGrade");
 var element3 = document.getElementById("story");
 var seasonDom = document.getElementById("season");
@@ -23,9 +24,9 @@ const days = 365;
     //brian begins making BBQ sauce. grading is replaced with barbeque sauce making. 
     //Students work on making barbeque sauce. Students fall in vats of barbeque sauce.
 
-
+var	isThursday = false;
 var money = 0;  
-
+var currentDayOfTheWeek = "";
 var salary = 49000; // The very low end of a computer engineering salary. 
 
     
@@ -42,7 +43,7 @@ class seasons
 
         frame = frame % days; 
 
-        frame /= 90; 
+        
 
         if (frame <= 100) // increment a day every three seconds. 
         {       // This changes the season around... every five minutes. 
@@ -66,7 +67,9 @@ class seasons
 
     static checkDay(frame)
     {
-        return daysOfTheWeek[frame];
+        
+        currentDayOfTheWeek = daysOfTheWeek[frame];
+		return currentDayOfTheWeek;
     }
 }
 
@@ -79,13 +82,13 @@ function grade()
     if (papersGraded == 0 && papersToGrade > 0)
     {
         papersGraded++; 
-        setDOM(element, "Brian has graded " + papersGraded + " assignmet.");
+        setDOM(element, "Brian has graded " + papersGraded + " assignment.");
         papersToGrade--; 
     }
     else if (papersToGrade > 0)
     {
         papersGraded++; 
-        setDOM(element, "Brian has graded " + papersGraded + " assignmets.");
+        setDOM(element, "Brian has graded " + papersGraded + " assignments.");
         papersToGrade--; 
     }
 
@@ -114,10 +117,17 @@ function loop()
         if (frameCount % 90 == 0)
             setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
  
-        if ( seasons.checkDay(frameCount / 90) == "Thursday")
+        if ( currentDayOfTheWeek == "Thursday" && !isThursday)
             {
                 money += Math.floor(salary / 52);
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				isThursday = true;
+				
             }
+		if (currentDayOfTheWeek != "Thursday")
+			{
+				isThursday = false;
+			}
 
     }, (1000 / 30));
 }
@@ -128,12 +138,12 @@ function calculatePapers()
      if (papersToGrade == 1)
         {
             //element2.innerHTML = "Brian has " +  papersToGrade + " assignmet to grade.";
-            setDOM(element2, ("Brian has " +  papersToGrade + " assignmet to grade."));
+            setDOM(element2, ("Brian has " +  papersToGrade + " assignments to grade."));
         }
     else
         { 
             //element2.innerHTML = "Brian has " +  papersToGrade + " assignmets to grade.";
-            setDOM(element2, "Brian has " +  papersToGrade + " assignmets to grade.");
+            setDOM(element2, "Brian has " +  papersToGrade + " assignments to grade.");
         }
 
 }
@@ -149,6 +159,8 @@ function story()
 
     else if(papersGraded > 100)
         setDOM(element3, "Brian begins to look for help.")
+	
+	
     
 }
 
