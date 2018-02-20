@@ -6,6 +6,7 @@ var element = document.getElementById("papersGraded");
 var element2 = document.getElementById("papersToGrade");
 var element3 = document.getElementById("story");
 var seasonDom = document.getElementById("season");
+var classListDom = document.getElementById("classList"); 
 
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
@@ -14,6 +15,10 @@ var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Fr
 //let seasons = seasons(); // val is "Hello";
 var currentSeason;
 const days = 365; 
+
+var numClasses = 1; 
+
+var listOfClasses = ["CSI-330"]
 //fall semester = first 100 days. 
 //winter break = 65 days. 
     //sort of like stardew valley. You can't do much. 
@@ -22,13 +27,17 @@ const days = 365;
 //summer break = 105 days. 
     //brian begins making BBQ sauce. grading is replaced with barbeque sauce making. 
     //Students work on making barbeque sauce. Students fall in vats of barbeque sauce.
-
+var classChange = true; 
 
 var money = 0;  
 
 var salary = 49000; // The very low end of a computer engineering salary. 
 
     
+
+
+
+
 class seasons
 {
     constructor(){
@@ -71,6 +80,48 @@ class seasons
 }
 
 
+// TAKING ON MORE CLASSES: 
+
+function moreClasses()
+{
+    numClasses++; 
+
+    //PREFIX-SUFFIX
+
+    var prefixes = ["CSI", "EGP", "COR", "CIS", "CIT", "CMIT", "DFS", "EGP", "ART", "LUL"];
+
+    var PREFIX = prefixes[Math.floor(Math.random() * prefixes.length)];
+
+    var SUFFIX = Math.floor(Math.random() * 499);  
+
+    var newClass = String(PREFIX) + String(SUFFIX); 
+
+    listOfClasses.push(newClass);
+
+    classChange = true; 
+
+}
+
+function lessClasses()
+{
+    numClasses--;
+
+    listOfClasses.pop();  
+
+    classChange = true; 
+}
+
+// END 
+
+
+
+
+
+
+
+
+
+
 function grade()
 {
 
@@ -102,10 +153,26 @@ function loop()
     setInterval(function(){ // 30 ticks / second game loop. 
         frameCount++; 
 
+        if(classChange)
+        {
+            classChange = false; 
+
+            var names  = ""
+
+            for(var i = 0; i < listOfClasses.length; i++)
+                
+                names = names + listOfClasses[i] + " - "
+
+            setDOM(classListDom, "Brian is taking on: " + names);
+
+            console.log("Brian is taking on: " + names)
+        }
+
+
 
         if (frameCount % 30 == 0)
         {
-            papersToGrade++; 
+            papersToGrade += numClasses; 
 
 
             calculatePapers();
@@ -114,7 +181,7 @@ function loop()
         if (frameCount % 90 == 0)
             setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
  
-        if ( seasons.checkDay(frameCount / 90) == "Thursday")
+        if ( seasons.checkDay((frameCount / 90) % 7) == "Thursday")
             {
                 money += Math.floor(salary / 52);
             }
@@ -140,6 +207,7 @@ function calculatePapers()
 
 function story()
 {
+
 
     if (papersGraded < 20)
         setDOM(element3, "You are Brian R Hall, a new professor at Champlain College. It is your job to grade everyone's assignments.")
