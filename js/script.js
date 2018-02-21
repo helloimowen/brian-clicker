@@ -7,6 +7,7 @@ var salaryDom = document.getElementById("money");
 var element2 = document.getElementById("papersToGrade");
 var element3 = document.getElementById("story");
 var seasonDom = document.getElementById("season");
+var employeeDom = document.getElementById("numEmployee");
 
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
@@ -28,6 +29,7 @@ var	isThursday = false;
 var money = 0;  
 var currentDayOfTheWeek = "";
 var salary = 49000; // The very low end of a computer engineering salary. 
+var numEmployees = 0;
 
     
 class seasons
@@ -76,14 +78,13 @@ class seasons
 
 function grade()
 {
-
-
-
     if (papersGraded == 0 && papersToGrade > 0)
     {
         papersGraded++; 
+        papersGraded += numEmployees;
         setDOM(element, "Brian has graded " + papersGraded + " assignment.");
         papersToGrade--; 
+        papersToGrade -= numEmployees;
     }
     else if (papersToGrade > 0)
     {
@@ -97,6 +98,17 @@ function grade()
     calculatePapers();
 } 
 
+function hire()
+{
+    if (money >= 100)
+    {
+        numEmployees++;
+        money -= 100;
+        setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+        setDOM(salaryDom,("Brian has $" + money + "."));
+    }
+}
+
 
 function loop()
 {   
@@ -109,7 +121,19 @@ function loop()
         if (frameCount % 30 == 0)
         {
             papersToGrade++; 
-
+            
+            if(numEmployees > papersToGrade)
+            {
+                papersGraded += papersToGrade;
+                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                papersToGrade = 0;
+            }
+            else
+            {
+                papersGraded += numEmployees;
+                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                papersToGrade -= numEmployees;
+            }
 
             calculatePapers();
         }
