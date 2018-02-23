@@ -167,8 +167,10 @@ function grade()
 
 function hire(x)
 {
+
     if (x == 0)
     {
+        overloadMax += 1; 
         if (money >= 100)
         {
             numEmployees++;
@@ -179,6 +181,7 @@ function hire(x)
     }
     else if (x == 1)
     {
+        overloadMax += 3; 
         if (money >= 1000)
         {
             numAssist++;
@@ -189,6 +192,7 @@ function hire(x)
     }
     else if (x == 2)
     {
+        overloadMax += 5; 
         if (money >= 2000)
         {
             numRobot++;
