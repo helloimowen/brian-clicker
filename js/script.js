@@ -30,6 +30,8 @@ var money = 0;
 var currentDayOfTheWeek = "";
 var salary = 49000; // The very low end of a computer engineering salary. 
 var numEmployees = 0;
+var numAssist = 0;
+var numRobot = 0;
 
     
 class seasons
@@ -69,7 +71,6 @@ class seasons
 
     static checkDay(frame)
     {
-        
         currentDayOfTheWeek = daysOfTheWeek[frame];
 		return currentDayOfTheWeek;
     }
@@ -98,14 +99,37 @@ function grade()
     calculatePapers();
 } 
 
-function hire()
+function hire(x)
 {
-    if (money >= 100)
+    if (x == 0)
     {
-        numEmployees++;
-        money -= 100;
-        setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
-        setDOM(salaryDom,("Brian has $" + money + "."));
+        if (money >= 100)
+        {
+            numEmployees++;
+            money -= 100;
+            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+            setDOM(salaryDom,("Brian has $" + money + "."));
+        }
+    }
+    else if (x == 1)
+    {
+        if (money >= 1000)
+        {
+            numAssist++;
+            money -= 1000;
+            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+            setDOM(salaryDom,("Brian has $" + money + "."));
+        }
+    }
+    else if (x == 2)
+    {
+        if (money >= 2000)
+        {
+            numRobot++;
+            money -= 2000;
+            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+            setDOM(salaryDom,("Brian has $" + money + "."));
+        }
     }
 }
 
@@ -133,6 +157,32 @@ function loop()
                 papersGraded += numEmployees;
                 setDOM(element, "Brian has graded " + papersGraded + " assignment.");
                 papersToGrade -= numEmployees;
+            }
+            //Assistants
+            if((numAssist*5) > papersToGrade)
+            {
+                papersGraded += papersToGrade;
+                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                papersToGrade = 0;
+            }
+            else
+            {
+                papersGraded += (numAssist*5);
+                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                papersToGrade -= (numAssist*5);
+            }
+            //Robots
+            if((numRobot*10) > papersToGrade)
+            {
+                papersGraded += papersToGrade;
+                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                papersToGrade = 0;
+            }
+            else
+            {
+                papersGraded += (numRobot*10);
+                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                papersToGrade -= (numRobot*10);
             }
 
             calculatePapers();
