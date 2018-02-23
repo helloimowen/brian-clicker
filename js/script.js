@@ -7,6 +7,7 @@ var element2 = document.getElementById("papersToGrade");
 var element3 = document.getElementById("story");
 var seasonDom = document.getElementById("season");
 var classListDom = document.getElementById("classList"); 
+var overloadWarning = document.getElementById("overload"); 
 
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
@@ -19,6 +20,8 @@ const days = 365;
 var numClasses = 1; 
 
 var listOfClasses = ["CSI-330"]
+
+var overloadMax = 3; 
 //fall semester = first 100 days. 
 //winter break = 65 days. 
     //sort of like stardew valley. You can't do much. 
@@ -84,31 +87,43 @@ class seasons
 
 function moreClasses()
 {
-    numClasses++; 
+    if (numClasses < overloadMax)
+    {
+        setDOM(overloadWarning, "")
+        numClasses++; 
 
-    //PREFIX-SUFFIX
+        //PREFIX-SUFFIX
 
-    var prefixes = ["CSI", "EGP", "COR", "CIS", "CIT", "CMIT", "DFS", "EGP", "ART", "LUL"];
+        var prefixes = ["CSI", "EGP", "COR", "CIS", "CIT", "CMIT", "DFS", "EGP", "ART", "LUL"];
 
-    var PREFIX = prefixes[Math.floor(Math.random() * prefixes.length)];
+        var PREFIX = prefixes[Math.floor(Math.random() * prefixes.length)];
 
-    var SUFFIX = Math.floor(Math.random() * 499);  
+        var SUFFIX = Math.floor(Math.random() * 499);  
 
-    var newClass = String(PREFIX) + String(SUFFIX); 
+        var newClass = String(PREFIX) + String(SUFFIX); 
 
-    listOfClasses.push(newClass);
+        listOfClasses.push(newClass);
 
-    classChange = true; 
+        classChange = true; 
+    }
+    else 
+    {
+        setDOM(overloadWarning, "BRIAN IS OVERLOADED AND CAN NO LONGER TAKE ON CLASSES.")
+    }
 
 }
 
 function lessClasses()
 {
-    numClasses--;
+    if (numClasses > 0 )
+    {
+        setDOM(overloadWarning, "")
+        numClasses--;
 
-    listOfClasses.pop();  
+        listOfClasses.pop();  
 
-    classChange = true; 
+        classChange = true; 
+    }
 }
 
 // END 
@@ -157,11 +172,11 @@ function loop()
         {
             classChange = false; 
 
-            var names  = ""
+            var names  = listOfClasses[0]
 
-            for(var i = 0; i < listOfClasses.length; i++)
+            for(var i = 1; i < listOfClasses.length; i++)
                 
-                names = names + listOfClasses[i] + " - "
+                names = names + " - " + listOfClasses[i]; 
 
             setDOM(classListDom, "Brian is taking on: " + names);
 
