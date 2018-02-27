@@ -43,6 +43,7 @@ var salary = 49000; // The very low end of a computer engineering salary.
 var numEmployees = 0;
 var numAssist = 0;
 var numRobot = 0;
+var numTas = 0;
 
     
 
@@ -151,9 +152,12 @@ function grade()
     if (papersGraded == 0 && papersToGrade > 0)
     {
         papersGraded++; 
-        papersGraded += numEmployees;
+        papersGraded += numTas;
+		papersGraded += numAssist*5;
+		papersGraded += numRobot*100;
         setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-        papersToGrade--; 
+        papersToGrade--;
+		money++;
         papersToGrade -= numEmployees;
 		money+=1;
 		setDOM(salaryDom,("Brian has $" + money + "."));
@@ -178,27 +182,29 @@ function hire(x)
     if (x == 0)
     {
          
-		if(numEmployees==0)
+		if(numTas==0)
 		{
-			if (money >= 1000*(numEmployees+1))
+			if (money >= 1000)
 			{
 				numEmployees++;
+				numTas++;
 				money -= 1000;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("ta","Costs $" + 1000*numEmployees*1.753 + ". Allows you to teach one more class.");
+				setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
 				overloadMax += 1;
 			}
 		}
 		else
 		{
-			if (money >= 10000*(numEmployees+1)*1.753)
+			if (money >= 10000*(numTas+1)*1.753)
 			{
 				numEmployees++;
+				numTas++;
 				money -= 10000*numEmployees*1.753;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("ta","Costs $" + 10000*numEmployees*1.753 + ". Allows you to teach one more class.");
+				setTitle("ta","Costs $" + 10000*numTas*1.753 + ". Allows you to teach one more class.");
 				overloadMax += 1;
 			}
 		}
@@ -210,7 +216,8 @@ function hire(x)
 		if(numAssist==0)
 		{
 			 if (money >= 100000)
-			{
+			{	
+				numEmployees++;
 				numAssist++;
 				money -= 100000;
 
@@ -223,6 +230,7 @@ function hire(x)
         else
 		{	if (money >= 100000*(numAssist+1)*1.753)
 			{
+				numEmployees++;
 				numAssist++;
 				money -= 100000*numAssist*1.753;
 
@@ -239,6 +247,7 @@ function hire(x)
 		{
 			if (money >= 2000000)
 			{
+				numEmployees++;
 				numRobot++;
 				money -= 2000000;
 
@@ -252,6 +261,7 @@ function hire(x)
 		{
 			if (money >= 2000000*(numRobot+1)*1.753)
 			{
+				numEmployees++;
 				numRobot++;
 				money -= 2000000*numRobot*1.753;
 
