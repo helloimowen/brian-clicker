@@ -152,12 +152,16 @@ function grade()
         setDOM(element, "Brian has graded " + papersGraded + " assignment.");
         papersToGrade--; 
         papersToGrade -= numEmployees;
+		money+=1;
+		setDOM(salaryDom,("Brian has $" + money + "."));
     }
     else if (papersToGrade > 0)
     {
         papersGraded++; 
         setDOM(element, "Brian has graded " + papersGraded + " assignments.");
         papersToGrade--; 
+		money+=1;
+		setDOM(salaryDom,("Brian has $" + money + "."));
     }
 
     story();
@@ -171,21 +175,22 @@ function hire(x)
     if (x == 0)
     {
         overloadMax += 1; 
-        if (money >= 100)
+        if (money >= 1000*(numEmployees+1)*1.753)
         {
             numEmployees++;
-            money -= 100;
-            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+            money -= 100*numEmployees*1.753;
+			money = Math.round(money).toFixed(2);            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
             setDOM(salaryDom,("Brian has $" + money + "."));
         }
     }
     else if (x == 1)
     {
         overloadMax += 3; 
-        if (money >= 1000)
+        if (money >= 100000*(numAssist+1)*1.753)
         {
             numAssist++;
-            money -= 1000;
+            money -= 100000*numAssist*1.753;
+
             setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
             setDOM(salaryDom,("Brian has $" + money + "."));
         }
@@ -193,10 +198,11 @@ function hire(x)
     else if (x == 2)
     {
         overloadMax += 5; 
-        if (money >= 2000)
+        if (money >= 2000000*(numRobot+1)*1.753)
         {
             numRobot++;
-            money -= 2000;
+            money -= 2000000*numRobot*1.753;
+
             setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
             setDOM(salaryDom,("Brian has $" + money + "."));
         }
@@ -307,6 +313,7 @@ function calculatePapers()
             //element2.innerHTML = "Brian has " +  papersToGrade + " assignmets to grade.";
             setDOM(element2, "Brian has " +  papersToGrade + " assignments to grade.");
         }
+	
 
 }
 
