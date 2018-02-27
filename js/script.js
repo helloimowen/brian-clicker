@@ -10,7 +10,7 @@ var seasonDom = document.getElementById("season");
 var classListDom = document.getElementById("classList"); 
 var overloadWarning = document.getElementById("overload"); 
 var employeeDom = document.getElementById("numEmployee");
-var priceTA = document.getElementById("ta");
+
 var pricePA = document.getElementById("pa");
 var priceRB = document.getElementById("rb");
 
@@ -177,17 +177,17 @@ function hire(x)
 
     if (x == 0)
     {
-        overloadMax += 1; 
+         
 		if(numEmployees==0)
 		{
-			if (money >= 1000*(numEmployees+1)*1.753)
+			if (money >= 1000*(numEmployees+1))
 			{
 				numEmployees++;
-				money -= 1000*numEmployees*1.753;
+				money -= 1000;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle(priceTA,("Costs $" + 1000*numEmployees*1.753 + ". Allows you to teach one more class."));
-				
+				setTitle("ta","Costs $" + 1000*numEmployees*1.753 + ". Allows you to teach one more class.");
+				overloadMax += 1;
 			}
 		}
 		else
@@ -198,36 +198,69 @@ function hire(x)
 				money -= 10000*numEmployees*1.753;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle(priceTA,("Costs $" + 10000*numEmployees*1.753 + ". Allows you to teach one more class."));
+				setTitle("ta","Costs $" + 10000*numEmployees*1.753 + ". Allows you to teach one more class.");
+				overloadMax += 1;
 			}
 		}
 		
     }
     else if (x == 1)
     {
-        overloadMax += 3; 
-        if (money >= 100000*(numAssist+1)*1.753)
-        {
-            numAssist++;
-            money -= 100000*numAssist*1.753;
+        
+		if(numAssist==0)
+		{
+			 if (money >= 100000)
+			{
+				numAssist++;
+				money -= 100000;
 
-            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
-            setDOM(salaryDom,("Brian has $" + money + "."));
-			setTitle(priceTA,("Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes."));
-        }
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes.");
+				overloadMax += 3;
+			}
+		}
+        else
+		{	if (money >= 100000*(numAssist+1)*1.753)
+			{
+				numAssist++;
+				money -= 100000*numAssist*1.753;
+
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes.");
+				overloadMax += 3;
+			}
+		}
     }
     else if (x == 2)
     {
-        overloadMax += 5; 
-        if (money >= 2000000*(numRobot+1)*1.753)
-        {
-            numRobot++;
-            money -= 2000000*numRobot*1.753;
+        if(numRobot==0)
+		{
+			if (money >= 2000000)
+			{
+				numRobot++;
+				money -= 2000000;
 
-            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
-            setDOM(salaryDom,("Brian has $" + money + "."));
-			setTitle(priceRB,("Costs $" + 100000*numRobot*1.753 + ". Allows you to teach three more classes."));
-        }
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
+				overloadMax += 5; 
+			}
+		}
+		else
+		{
+			if (money >= 2000000*(numRobot+1)*1.753)
+			{
+				numRobot++;
+				money -= 2000000*numRobot*1.753;
+
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
+				overloadMax += 5; 
+			}
+		}
     }
 }
 
@@ -362,8 +395,8 @@ function setDOM(element, string) // pass an item in the DOM some text.
     element.innerHTML = string; 
 }
 
-function setTitle(element,string)
+function setTitle(type,string)
 {
-	element.title = string;
+	document.getElementById(type).title = string;
 }
 
