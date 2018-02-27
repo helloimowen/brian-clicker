@@ -184,7 +184,7 @@ function hire(x)
 			{
 				numEmployees++;
 				money -= 1000*numEmployees*1.753;
-				money = Math.round(money).toFixed(2);            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle(priceTA,("Costs $" + 1000*numEmployees*1.753 + ". Allows you to teach one more class."));
 				
@@ -196,7 +196,7 @@ function hire(x)
 			{
 				numEmployees++;
 				money -= 10000*numEmployees*1.753;
-				money = Math.round(money).toFixed(2);            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle(priceTA,("Costs $" + 10000*numEmployees*1.753 + ". Allows you to teach one more class."));
 			}
@@ -364,6 +364,6 @@ function setDOM(element, string) // pass an item in the DOM some text.
 
 function setTitle(element,string)
 {
-	element.setTitle = string;
+	element.title = string;
 }
 
