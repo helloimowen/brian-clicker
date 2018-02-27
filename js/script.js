@@ -10,6 +10,9 @@ var seasonDom = document.getElementById("season");
 var classListDom = document.getElementById("classList"); 
 var overloadWarning = document.getElementById("overload"); 
 var employeeDom = document.getElementById("numEmployee");
+var priceTA = document.getElementById("ta");
+var pricePA = document.getElementById("pa");
+var priceRB = document.getElementById("rb");
 
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
@@ -175,13 +178,30 @@ function hire(x)
     if (x == 0)
     {
         overloadMax += 1; 
-        if (money >= 1000*(numEmployees+1)*1.753)
-        {
-            numEmployees++;
-            money -= 100*numEmployees*1.753;
-			money = Math.round(money).toFixed(2);            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
-            setDOM(salaryDom,("Brian has $" + money + "."));
-        }
+		if(numEmployees==0)
+		{
+			if (money >= 1000*(numEmployees+1)*1.753)
+			{
+				numEmployees++;
+				money -= 1000*numEmployees*1.753;
+				money = Math.round(money).toFixed(2);            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle(priceTA,("Costs $" + 1000*numEmployees*1.753 + ". Allows you to teach one more class."));
+				
+			}
+		}
+		else
+		{
+			if (money >= 10000*(numEmployees+1)*1.753)
+			{
+				numEmployees++;
+				money -= 10000*numEmployees*1.753;
+				money = Math.round(money).toFixed(2);            setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle(priceTA,("Costs $" + 10000*numEmployees*1.753 + ". Allows you to teach one more class."));
+			}
+		}
+		
     }
     else if (x == 1)
     {
@@ -193,6 +213,7 @@ function hire(x)
 
             setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
             setDOM(salaryDom,("Brian has $" + money + "."));
+			setTitle(priceTA,("Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes."));
         }
     }
     else if (x == 2)
@@ -205,6 +226,7 @@ function hire(x)
 
             setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
             setDOM(salaryDom,("Brian has $" + money + "."));
+			setTitle(priceRB,("Costs $" + 100000*numRobot*1.753 + ". Allows you to teach three more classes."));
         }
     }
 }
@@ -338,5 +360,10 @@ function story()
 function setDOM(element, string) // pass an item in the DOM some text. 
 {
     element.innerHTML = string; 
+}
+
+function setTitle(element,string)
+{
+	element.setTitle = string;
 }
 
