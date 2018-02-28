@@ -290,7 +290,7 @@ function loop()
             }
 		if (currentDayOfTheWeek != "Thursday")
 			{
-				isM = false;
+				isThursday = false;
 			}
 
     }, (1000 / 30));
@@ -382,6 +382,8 @@ function story()
             papersToGrade += 50;
             meeting = false;
             document.getElementById("meeting").style.visibility = "hidden";
+
+            
         }
     }
     
