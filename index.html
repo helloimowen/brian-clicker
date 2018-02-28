@@ -51,7 +51,7 @@
       border: 1px solid grey;
     }
 
-    .buttonGroup{
+    .buttonGroup, .buttonGroup2, .buttonGroup3 {
 
       width: 40%;
 
@@ -100,19 +100,21 @@
     <div class = "buttonContainer">       
     
     
+      <button class = "gradeButton buttonGroup" id="sauce" style="visibility: hidden" onclick="makeSauce();" title="Make Barbecue Sauce.">Make sauce.</button>
       <div id = "buttonGroup">
-        <button class = "gradeButton buttonGroup" onclick="grade();" title="Grade a paper.">Grade.</button>
+        <button class = "gradeButton buttonGroup" id="grade" onclick="grade();" title="Grade a paper.">Grade.</button>
         <button class = "gradeButton buttonGroup" id="meeting" style="visibility: hidden" onclick="attendMeeting();">Attend Meeting.</button>
+        
       </div>
       </br>
-      <div id = "buttonGroup">
+      <div id = "buttonGroup2">
         <button class = "employee buttonGroup" onclick="hire(0);" title="Costs $100. Allows you to teach one more class.">Hire TA.</button>
         <button class = "employee buttonGroup" onclick="hire(1);" title="Costs $1000. Allows you to teach three more classes.">Hire Personal Assistant.</button>
         <button class = "employee buttonGroup" onclick="hire(2);" title="Costs $2000. Allows you to teach five more classes.">Order Grading Robot.</button>
       </div>
 
       </br>
-      <div id = "buttonGroup">
+      <div id = "buttonGroup3">
         <button class="classInc buttonGroup" onclick="moreClasses();" title="Take on another class.">Teach More</button>
         <button class="classInc buttonGroup" onclick="lessClasses();" title="Stop Teaching one of your classes.">Teach Less</button>
       </div>

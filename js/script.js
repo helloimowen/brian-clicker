@@ -43,7 +43,7 @@ var numEmployees = 0;
 var numAssist = 0;
 var numRobot = 0;
 var meeting = false;
-
+var BBQ = 0;
     
 
 
@@ -211,87 +211,107 @@ function loop()
 
     setInterval(function(){ // 30 ticks / second game loop. 
         frameCount++; 
-
-        if(classChange)
-        {
-            classChange = false; 
-
-            var names  = listOfClasses[0]
-
-            for(var i = 1; i < listOfClasses.length; i++)
-                
-                names = names + " - " + listOfClasses[i]; 
-
-            setDOM(classListDom, "Brian is taking on: " + names);
-
-            console.log("Brian is taking on: " + names)
-        }
-
-        //call to story function
-        story();
-
-        if (frameCount % 30 == 0)
-        {
-            papersToGrade += numClasses; 
-
-            
-            if(numEmployees > papersToGrade)
-            {
-                papersGraded += papersToGrade;
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade = 0;
-            }
-            else
-            {
-                papersGraded += numEmployees;
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade -= numEmployees;
-            }
-            //Assistants
-            if((numAssist*5) > papersToGrade)
-            {
-                papersGraded += papersToGrade;
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade = 0;
-            }
-            else
-            {
-                papersGraded += (numAssist*5);
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade -= (numAssist*5);
-            }
-            //Robots
-            if((numRobot*10) > papersToGrade)
-            {
-                papersGraded += papersToGrade;
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade = 0;
-            }
-            else
-            {
-                papersGraded += (numRobot*10);
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade -= (numRobot*10);
-            }
-
-            calculatePapers();
-        }
-
+        
         if (frameCount % 90 == 0)
             setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
  
-
-        if ( currentDayOfTheWeek == "Thursday" && !isThursday)
+        if(currentSeason == "Summer")
+        {
+            document.getElementById("grade").style.visibility = "hidden";
+            document.getElementById("sauce").style.visibility = "visible";
+            document.getElementById("buttonGroup").style.visibility = "hidden";
+            document.getElementById("buttonGroup2").style.visibility = "hidden";
+            document.getElementById("buttonGroup3").style.visibility = "hidden";
+            summerStory();
+        }
+        else
+        {
+            document.getElementById("grade").style.visibility = "visible";
+            document.getElementById("sauce").style.visibility = "hidden";
+            document.getElementById("buttonGroup").style.visibility = "visible";
+            document.getElementById("buttonGroup2").style.visibility = "visible";
+            document.getElementById("buttonGroup3").style.visibility = "visible";
+            
+            if(classChange)
             {
-                money += Math.floor(salary / 52);
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				isThursday = true;
-				
+                classChange = false; 
+
+                var names  = listOfClasses[0]
+
+                for(var i = 1; i < listOfClasses.length; i++)
+                    
+                    names = names + " - " + listOfClasses[i]; 
+
+                setDOM(classListDom, "Brian is taking on: " + names);
+
+                console.log("Brian is taking on: " + names)
             }
-		if (currentDayOfTheWeek != "Thursday")
-			{
-				isThursday = false;
-			}
+
+            //call to story function
+            story();
+
+            if (frameCount % 30 == 0)
+            {
+                papersToGrade += numClasses; 
+
+                
+                if(numEmployees > papersToGrade)
+                {
+                    papersGraded += papersToGrade;
+                    setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                    papersToGrade = 0;
+                }
+                else
+                {
+                    papersGraded += numEmployees;
+                    setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                    papersToGrade -= numEmployees;
+                }
+                //Assistants
+                if((numAssist*5) > papersToGrade)
+                {
+                    papersGraded += papersToGrade;
+                    setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                    papersToGrade = 0;
+                }
+                else
+                {
+                    papersGraded += (numAssist*5);
+                    setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                    papersToGrade -= (numAssist*5);
+                }
+                //Robots
+                if((numRobot*10) > papersToGrade)
+                {
+                    papersGraded += papersToGrade;
+                    setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                    papersToGrade = 0;
+                }
+                else
+                {
+                    papersGraded += (numRobot*10);
+                    setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+                    papersToGrade -= (numRobot*10);
+                }
+
+                calculatePapers();
+            }
+
+            if ( currentDayOfTheWeek == "Thursday" && !isThursday)
+                {
+                    money += Math.floor(salary / 52);
+                    setDOM(salaryDom,("Brian has $" + money + "."));
+                    isThursday = true;
+                    
+                }
+            if (currentDayOfTheWeek != "Thursday")
+                {
+                    isThursday = false;
+                }
+        }
+        
+ 
+        
 
     }, (1000 / 30));
 }
@@ -310,6 +330,28 @@ function calculatePapers()
             setDOM(element2, "Brian has " +  papersToGrade + " assignments to grade.");
         }
 
+}
+
+function summerStory()
+{
+    if (BBQ == 0)
+        setDOM(element3, "Brian is making BBQ sauce");
+    else if (BBQ >= 5 && BBQ <= 9)
+        setDOM(element3, "Brian is a fan of (INSERT REGIONAL STYLE)");
+    else if (BBQ >= 10 && BBQ <= 19)
+        setDOM(element3, "That's quite a bit of sauce.");
+    else if (BBQ >= 20 && BBQ <= 49)
+        setDOM(element3, "Sauce for days. Literally.");
+    else if (BBQ >= 50 && BBQ <= 90)
+        setDOM(element3, "The special ingredient... is love.");
+    else if (BBQ >= 100 && BBQ <= 500)
+        setDOM(element3, "Just how much is 100 sauce?");
+}
+
+function makeSauce()
+{
+    BBQ++;
+    setDOM(element2, "Brian has made " + BBQ + " BBQ sauce");
 }
 
 function story()
@@ -393,6 +435,8 @@ function attendMeeting()
 {
 	meeting = false;
 	document.getElementById("meeting").style.visibility = "hidden";
+    money += 100;
+    setDOM(salaryDom,("Brian has $" + money + "."));
 }
 
 function setDOM(element, string) // pass an item in the DOM some text. 
