@@ -6,6 +6,7 @@ var element = document.getElementById("papersGraded");
 var salaryDom = document.getElementById("money");
 var element2 = document.getElementById("papersToGrade");
 var element3 = document.getElementById("story");
+var element4 = document.getElementById("work");
 var seasonDom = document.getElementById("season");
 var classListDom = document.getElementById("classList"); 
 var overloadWarning = document.getElementById("overload"); 
@@ -40,6 +41,7 @@ var salary = 49000; // The very low end of a computer engineering salary.
 var numEmployees = 0;
 var numAssist = 0;
 var numRobot = 0;
+var meeting = 10;
 
     
 
@@ -160,8 +162,6 @@ function grade()
         papersToGrade--; 
     }
 
-    story();
-
     calculatePapers();
 } 
 
@@ -226,7 +226,8 @@ function loop()
             console.log("Brian is taking on: " + names)
         }
 
-
+        //call to story function
+        story();
 
         if (frameCount % 30 == 0)
         {
@@ -313,20 +314,61 @@ function calculatePapers()
 function story()
 {
 
-
+	//general story stuff
     if (papersGraded < 20)
         setDOM(element3, "You are Brian R Hall, a new professor at Champlain College. It is your job to grade everyone's assignments.")
 
     else if (papersGraded > 20 && papersGraded < 40)
         setDOM(element3, "Brian doesn't want to grade anymore Assignments.")
 
-    else if(papersGraded > 100)
+    else if(papersGraded > 100 && papersGraded < 400)
         setDOM(element3, "Brian begins to look for help.")
 	
+	else if(papersGraded > 500 && papersGraded < 900)
+        setDOM(element3, "Brian dreams of barbeque sauce.")
 	
+	else if(papersGraded > 1000 && papersGraded < 4000)
+        setDOM(element3, "One Thousand assignments. A milestone in Brian's career.")
+	
+	
+	//amount of work
+	if(papersToGrade > 500)
+        setDOM(element4, "This is getting out of hand.")
+	
+	else if(papersToGrade > 100)
+        setDOM(element4, "Brian needs to get to work. He's feeling stressed.")
+		
+	else if(papersToGrade > 50)
+        setDOM(element4, "Brian's got some work to do.")	
+		
+	else if(papersToGrade > 10)
+        setDOM(element4, "Brian needs to get to work.")
+		
+	else if(papersToGrade <= 5)
+        setDOM(element4, "Brian is feeling relaxed.")
+	
+	
+	//Meetings: planned meetings, show countdown then reveal button. If not clicked, add assignments/penalize
+	
+    if(meeting != 0)
+    {
+        //
+        meeting = Math.floor(Math.random() * 1000)
+    }
+    else
+	{	
+        document.getElementById("meeting").style.visibility = "visible";
+        meeting++;
+	}
     
 }
 
+function attendMeeting()
+{
+	money+=500;
+	setDOM(salaryDom,("Brian has $" + money + "."));
+	document.getElementById("meeting").style.visibility = "hidden";
+}
 
 function setDOM(element, string) // pass an item in the DOM some text. 
 {
