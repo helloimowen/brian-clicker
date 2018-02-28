@@ -35,13 +35,14 @@ var overloadMax = 3;
     //Students work on making barbeque sauce. Students fall in vats of barbeque sauce.
 var classChange = true; 
 var	isThursday = false;
+var	isMonday = false;
 var money = 0;  
 var currentDayOfTheWeek = "";
 var salary = 49000; // The very low end of a computer engineering salary. 
 var numEmployees = 0;
 var numAssist = 0;
 var numRobot = 0;
-var meeting = 10;
+var meeting = false;
 
     
 
@@ -289,7 +290,7 @@ function loop()
             }
 		if (currentDayOfTheWeek != "Thursday")
 			{
-				isThursday = false;
+				isM = false;
 			}
 
     }, (1000 / 30));
@@ -325,14 +326,29 @@ function story()
         setDOM(element3, "Brian begins to look for help.")
 	
 	else if(papersGraded > 500 && papersGraded < 900)
-        setDOM(element3, "Brian dreams of barbeque sauce.")
+        setDOM(element3, "Brian dreams of barbecue sauce.")
 	
 	else if(papersGraded > 1000 && papersGraded < 4000)
         setDOM(element3, "One Thousand assignments. A milestone in Brian's career.")
+    
+    else if(papersGraded > 5000 && papersGraded < 9000)
+        setDOM(element3, "Grading five thousand assignments has really taken its toll on Brain.")
+    
+    else if(papersGraded > 10000 && papersGraded < 40000)
+        setDOM(element3, "Brian has graded 10,000 assignments. If he isn't tenured yet, he should be.")
 	
 	
-	//amount of work
-	if(papersToGrade > 500)
+	//amount of work to do
+    if(papersToGrade > 10000)
+        setDOM(element4, "Wei would be very disappointed. Or not, I can't speak for Wei. I'm a line of Javascript, for goodness sake.")
+    
+    else if(papersToGrade > 5000)
+        setDOM(element4, "I'm surprised he hasn't been fired yet.")
+    
+    else if(papersToGrade > 1000)
+        setDOM(element4, "Brian is crying. How could you do this?")
+    
+	else if(papersToGrade > 500)
         setDOM(element4, "This is getting out of hand.")
 	
 	else if(papersToGrade > 100)
@@ -349,24 +365,31 @@ function story()
 	
 	
 	//Meetings: planned meetings, show countdown then reveal button. If not clicked, add assignments/penalize
-	
-    if(meeting != 0)
+    
+    
+    if (currentDayOfTheWeek == "Monday" && !isMonday)
     {
-        //
-        meeting = Math.floor(Math.random() * 1000)
-    }
-    else
-	{	
         document.getElementById("meeting").style.visibility = "visible";
-        meeting++;
-	}
+        isMonday = true;
+        meeting = true;
+    }
+    
+    if (currentDayOfTheWeek != "Monday")
+    {
+        isMonday = false;
+        if (meeting == true)
+        {
+            papersToGrade += 50;
+            meeting = false;
+            document.getElementById("meeting").style.visibility = "hidden";
+        }
+    }
     
 }
 
 function attendMeeting()
 {
-	money+=500;
-	setDOM(salaryDom,("Brian has $" + money + "."));
+	meeting = false;
 	document.getElementById("meeting").style.visibility = "hidden";
 }
 
