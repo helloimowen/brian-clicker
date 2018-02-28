@@ -8,17 +8,30 @@
   <meta name="description" content="Brian Hall clicker?">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+
+    div.overContainer{
+      display: flex;
+      
+    }
    div.container{
+      display: flex;
+      flex-direction: column;
       width: 75%;
-      border: 1px solid grey;
-      position: fixed;
+      flex-grow: 1;
+      flex-shrink: 1;
     }
 
     div.buttonContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       width: 75%;
+      flex-grow: 1;
+      flex-shrink: 1;
       position: fixed;
       bottom: 0;
     }
+
 
     .gradeButton{
       background-color: #9bb899;
@@ -39,11 +52,10 @@
     }
 
     .buttonGroup{
-      display: block;
-      margin: 0;
-      margin-left: auto;
-      margin-right: auto;
+
       width: 40%;
+
+
     }
     .p{
       font-size:2vw;
@@ -59,49 +71,50 @@
 
 
 <body>
-  <div class = "container">
+  <div class="overContainer">
+    <div class = "container">
 
-    <p id="season">It is currently the Fall. Sunday - Day 1.</p>
-    <p id ="money">Brian has $0.</p>
-    <p id ="numEmployee"></p>
-    <p id="papersToGrade"></p>
-    <p id="papersGraded"></p>
-    <p id="classList"></p>
+      <p id="season">It is currently the Fall. Sunday - Day 1.</p>
+      <p id ="money">Brian has $0.</p>
+      <p id ="numEmployee"></p>
+      <p id="papersToGrade"></p>
+      <p id="papersGraded"></p>
+      <p id="classList"></p>
 
 
-    <p id="story"></p>
+      <p id="story"></p>
 
-    <marquee>
-      <p id="overload"></p>
-    </marquee>
+      <marquee>
+        <p id="overload"></p>
+      </marquee>
 
-    <script src="js/script.js">
-    </script>
+      <script src="js/script.js">
+      </script>
 
-    <script type="text/javascript">
-    	//init(); 
-      loop();
-  	</script>
+      <script type="text/javascript">
+      	//init(); 
+        loop();
+    	</script>
+    </div>
+
+    <div class = "buttonContainer">
+      <div id = "buttonGroup">
+        <button class = "gradeButton buttonGroup" onclick="grade();" title="Grade a paper.">Grade.</button>
+      </div>
+      </br>
+      <div id = "buttonGroup">
+        <button class = "employee buttonGroup" onclick="hire(0);" title="Costs $100. Allows you to teach one more class.">Hire TA.</button>
+        <button class = "employee buttonGroup" onclick="hire(1);" title="Costs $1000. Allows you to teach three more classes.">Hire Personal Assistant.</button>
+        <button class = "employee buttonGroup" onclick="hire(2);" title="Costs $2000. Allows you to teach five more classes.">Order Grading Robot.</button>
+      </div>
+
+      </br>
+      <div id = "buttonGroup">
+        <button class="classInc buttonGroup" onclick="moreClasses();" title="Take on another class.">Teach More</button>
+        <button class="classInc buttonGroup" onclick="lessClasses();" title="Stop Teaching one of your classes.">Teach Less</button>
+      </div>
+    </div>
   </div>
-
-  <div class = "buttonContainer">
-    <div id = "buttonGroup">
-      <button class = "gradeButton buttonGroup" onclick="grade();" title="Grade a paper.">Grade.</button>
-    </div>
-    </br>
-    <div id = "buttonGroup">
-      <button class = "employee buttonGroup" onclick="hire(0);" title="Costs $100. Allows you to teach one more class.">Hire TA.</button>
-      <button class = "employee buttonGroup" onclick="hire(1);" title="Costs $1000. Allows you to teach three more classes.">Hire Personal Assistant.</button>
-      <button class = "employee buttonGroup" onclick="hire(2);" title="Costs $2000. Allows you to teach five more classes.">Order Grading Robot.</button>
-    </div>
-
-    </br>
-    <div id = "buttonGroup">
-      <button class="classInc buttonGroup" onclick="moreClasses();" title="Take on another class.">Teach More</button>
-      <button class="classInc buttonGroup" onclick="lessClasses();" title="Stop Teaching one of your classes.">Teach Less</button>
-    </div>
-  </div>
-
 </body>
 
 </html>
