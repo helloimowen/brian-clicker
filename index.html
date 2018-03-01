@@ -11,6 +11,7 @@
 
     div.overContainer{
       display: flex;
+      justify-content: space-around;
       
     }
    div.container{
@@ -62,9 +63,49 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
+    .storybox
+    {
+      width: 60%;
+
+    }
+    .statsbox
+    {
+
+    }
+
+    p.season
+    {
+      font-size: 16px
+    }
+
     body{
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
+
+      @media all and (max-width: 500px) {
+    div.container {
+      /* On small screens, we are no longer using row direction but column */
+      flex-direction: column;
+    }
+    .storybox
+      {
+        width: 100%;
+
+      }
+    div.buttonContainer
+    {
+        width: 100%;
+    }
+    .buttonGroup, .buttonGroup2, .buttonGroup3 {
+    
+      width: 49%;
+    }
+
+        .gradeButton{
+      background-color: #9bb899;
+      padding: 16px 5px;
+    }
+  }
 
 
   </style>
@@ -74,8 +115,8 @@
 <body>
   <div class="overContainer">
     <div class = "container">
-      <div> <!--STORY GOES HERE.-->
-        <p id="season">It is currently the Fall. Sunday - Day 1.</p>
+      <div class = "storybox"> <!--STORY GOES HERE.-->
+        <h3 id="season">It is currently the Fall. Sunday - Day 1.</h3>
 
 
 
@@ -87,7 +128,7 @@
         </marquee>
 
       </div>
-      <div><!--NUMBERS GO HERE.-->
+      <div class = "statsbox"><!--NUMBERS GO HERE.-->
 
         <p id ="money">Brian has $0.</p>
         <p id ="numEmployee"></p>
