@@ -198,14 +198,14 @@ function hire(x)
 		}
 		else
 		{
-			if (money >= 10000*(numTas+1)*1.753)
+			if (money >= 1000*(numTas)*1.753)
 			{
+                money -= 1000*numTas*1.753;
 				numEmployees++;
 				numTas++;
-				money -= 10000*numEmployees*1.753;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("ta","Costs $" + 10000*numTas*1.753 + ". Allows you to teach one more class.");
+				setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
 				overloadMax += 1;
 			}
 		}
@@ -229,12 +229,11 @@ function hire(x)
 			}
 		}
         else
-		{	if (money >= 100000*(numAssist+1)*1.753)
+		{	if (money >= 100000*(numAssist)*1.753)
 			{
+                money -= 100000*numAssist*1.753;
 				numEmployees++;
 				numAssist++;
-				money -= 100000*numAssist*1.753;
-
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes.");
@@ -260,11 +259,12 @@ function hire(x)
 		}
 		else
 		{
-			if (money >= 2000000*(numRobot+1)*1.753)
-			{
+			if (money >= 2000000*(numRobot)*1.753)
+			{                
+                money -= 2000000*numRobot*1.753;
 				numEmployees++;
 				numRobot++;
-				money -= 2000000*numRobot*1.753;
+
 
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
