@@ -1,14 +1,14 @@
-var papersToGrade = 0; 
+var papersToGrade = 0;
 var papersGraded = 0;
-var frameCount = 0; // globals are good. 
+var frameCount = 0; // globals are good.
 
 var element = document.getElementById("papersGraded");
 var salaryDom = document.getElementById("money");
 var element2 = document.getElementById("papersToGrade");
 var element3 = document.getElementById("story");
 var seasonDom = document.getElementById("season");
-var classListDom = document.getElementById("classList"); 
-var overloadWarning = document.getElementById("overload"); 
+var classListDom = document.getElementById("classList");
+var overloadWarning = document.getElementById("overload");
 var employeeDom = document.getElementById("numEmployee");
 
 var pricePA = document.getElementById("pa");
@@ -20,32 +20,42 @@ var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Fr
 //import seasons from 'seasons.js'; // or './module'
 //let seasons = seasons(); // val is "Hello";
 var currentSeason;
-const days = 365; 
+const days = 365;
 
-var numClasses = 1; 
+var numClasses = 1;
 
 var listOfClasses = ["CSI-330"]
 
-var overloadMax = 3; 
-//fall semester = first 100 days. 
-//winter break = 65 days. 
-    //sort of like stardew valley. You can't do much. 
-//spring semester = 100 days. 
-    // new students. More 
-//summer break = 105 days. 
-    //brian begins making BBQ sauce. grading is replaced with barbeque sauce making. 
+var overloadMax = 3;
+//fall semester = first 100 days.
+//winter break = 65 days.
+    //sort of like stardew valley. You can't do much.
+//spring semester = 100 days.
+    // new students. More
+//summer break = 105 days.
+    //brian begins making BBQ sauce. grading is replaced with barbeque sauce making.
     //Students work on making barbeque sauce. Students fall in vats of barbeque sauce.
-var classChange = true; 
+var classChange = true;
 var	isThursday = false;
-var money = 0;  
+var money = 0;
 var currentDayOfTheWeek = "";
-var salary = 49000; // The very low end of a computer engineering salary. 
+var salary = 49000; // The very low end of a computer engineering salary.
 var numEmployees = 0;
 var numAssist = 0;
 var numRobot = 0;
 var numTas = 0;
+var taUpgrade = 0;
+var paUpgrade = 0;
+var grUpgrade = 0;
+var bhUpgrade = 0;
+var masterScale = 0.1;
+var taUpgradeCost = 1500;
+var paUpgradeCost = 200000;
+var grUpgradeCost = 3000000;
+var bhUpgradeCost = 1000;
 
-    
+
+
 
 
 
@@ -61,12 +71,12 @@ class seasons
 
     static checkSeason(frame){
 
-        frame = frame % days; 
+        frame = frame % days;
 
-        
 
-        if (frame <= 100) // increment a day every three seconds. 
-        {       // This changes the season around... every five minutes. 
+
+        if (frame <= 100) // increment a day every three seconds.
+        {       // This changes the season around... every five minutes.
             currentSeason = "Fall";
         }
         else if  (frame > 100 && frame <= 165)
@@ -83,7 +93,7 @@ class seasons
         }
 
         return currentSeason;
-    } 
+    }
 
     static checkDay(frame)
     {
@@ -93,14 +103,14 @@ class seasons
 }
 
 
-// TAKING ON MORE CLASSES: 
+// TAKING ON MORE CLASSES:
 
 function moreClasses()
 {
     if (numClasses < overloadMax)
     {
         setDOM(overloadWarning, "")
-        numClasses++; 
+        numClasses++;
 
         //PREFIX-SUFFIX
 
@@ -108,15 +118,15 @@ function moreClasses()
 
         var PREFIX = prefixes[Math.floor(Math.random() * prefixes.length)];
 
-        var SUFFIX = Math.floor(Math.random() * 499);  
+        var SUFFIX = Math.floor(Math.random() * 499);
 
-        var newClass = String(PREFIX) + String(SUFFIX); 
+        var newClass = String(PREFIX) + String(SUFFIX);
 
         listOfClasses.push(newClass);
 
-        classChange = true; 
+        classChange = true;
     }
-    else 
+    else
     {
         setDOM(overloadWarning, "BRIAN IS OVERLOADED AND CAN NO LONGER TAKE ON CLASSES.")
     }
@@ -130,28 +140,128 @@ function lessClasses()
         setDOM(overloadWarning, "")
         numClasses--;
 
-        listOfClasses.pop();  
+        listOfClasses.pop();
 
-        classChange = true; 
+        classChange = true;
     }
 }
 
-// END 
+// END
 
+// Upgrades
 
+function upgrade(option)
+{
+	if(option == 0)
+	{
+		if(bhUpgrade == 0)
+		{
+			if (money >= 1000)
+			{
+				bhUpgrade++;
+				money -= 1000;
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + bhUpgrade + " upgrades.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("bhU","Costs $" + 1000 + ". Allows you grade assignments quicker.");
+			}
+		}
+		else
+		{
+			if (money >= 1000)
+			{
+				bhUpgrade++;
+				money -= 1000*bhUpgrade*0.173;
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + bhUpgrade + " upgrades.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("bhU","Costs $" + 1000*bhUpgrade*0.173 + ". Allows you grade assignments quicker.");
+			}
+		}
+	}
+	if(option == 1)
+	{
+		if(taUpgrade == 0)
+		{
+			if (money >= 1500)
+			{
+				taUpgrade++;
+				money -= 1500;
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + taUpgrade + " upgrades.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("taU","Costs $" + 1500 + ". Allows you grade assignments quicker.");
+			}
+		}
+		else
+		{
+			if (money >= 1500)
+			{
+				taUpgrade++;
+				money -= 1500*taUpgrade*0.173;
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + taUpgrade + " upgrades.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("taU","Costs $" + 1500*taUpgrade*0.173 + ". Allows you grade assignments quicker.");
+			}
+		}
+	}
+	if(option == 2)
+	{
+		if(paUpgrade == 0)
+		{
+			if (money >= 150000)
+			{
+				paUpgrade++;
+				money -= 150000;
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + paUpgrade + " upgrades.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("paU","Costs $" + 150000 + ". Allows you grade assignments quicker.");
+			}
+		}
+		else
+		{
+			if (money >= 150000)
+			{
+				paUpgrade++;
+				money -= 150000*paUpgrade*0.173;
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + paUpgrade + " upgrades.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("paU","Costs $" + 150000*paUpgrade*0.173 + ". Allows you grade assignments quicker.");
+			}
+		}
+	}
+	if(option == 3)
+	{
+		grUpgrade++;
+		if(grUpgrade == 0)
+		{
+			if (money >= 3000000)
+			{
+				grUpgrade++;
+				money -= 3000000;
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + grUpgrade + " upgrades.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("grU","Costs $" + 3000000 + ". Allows you grade assignments quicker.");
+			}
+		}
+		else
+		{
+			if (money >= 3000000)
+			{
+				grUpgrade++;
+				money -= 3000000*grUpgrade*0.173;
+				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + grUpgrade + " upgrades.");
+				setDOM(salaryDom,("Brian has $" + money + "."));
+				setTitle("grU","Costs $" + 3000000*grUpgrade*0.173 + ". Allows you grade assignments quicker.");
+			}
+		}
+	}
+}
 
-
-
-
-
-
-
+// END
 
 function grade()
 {
     if (papersGraded == 0 && papersToGrade > 0)
     {
-        papersGraded++; 
+        papersGraded++;
         papersGraded += numTas;
 		papersGraded += numAssist*5;
 		papersGraded += numRobot*100;
@@ -164,9 +274,9 @@ function grade()
     }
     else if (papersToGrade > 0)
     {
-        papersGraded++; 
+        papersGraded++;
         setDOM(element, "Brian has graded " + papersGraded + " assignments.");
-        papersToGrade--; 
+        papersToGrade--;
 		money+=1;
 		setDOM(salaryDom,("Brian has $" + money + "."));
     }
@@ -174,14 +284,14 @@ function grade()
     story();
 
     calculatePapers();
-} 
+}
 
 function hire(x)
 {
 
     if (x == 0)
     {
-         
+
 		if(numTas==0)
 		{
 			if (money >= 1000)
@@ -208,15 +318,15 @@ function hire(x)
 				overloadMax += 1;
 			}
 		}
-		
+
     }
     else if (x == 1)
     {
-        
+
 		if(numAssist==0)
 		{
 			 if (money >= 100000)
-			{	
+			{
 				numEmployees++;
 				numAssist++;
 				money -= 100000;
@@ -254,7 +364,7 @@ function hire(x)
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
-				overloadMax += 5; 
+				overloadMax += 5;
 			}
 		}
 		else
@@ -268,7 +378,7 @@ function hire(x)
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
-				overloadMax += 5; 
+				overloadMax += 5;
 			}
 		}
     }
@@ -276,21 +386,21 @@ function hire(x)
 
 
 function loop()
-{   
+{
 
 
-    setInterval(function(){ // 30 ticks / second game loop. 
-        frameCount++; 
+    setInterval(function(){ // 30 ticks / second game loop.
+        frameCount++;
 
         if(classChange)
         {
-            classChange = false; 
+            classChange = false;
 
             var names  = listOfClasses[0]
 
             for(var i = 1; i < listOfClasses.length; i++)
-                
-                names = names + " - " + listOfClasses[i]; 
+
+                names = names + " - " + listOfClasses[i];
 
             setDOM(classListDom, "Brian is taking on: " + names);
 
@@ -301,9 +411,9 @@ function loop()
 
         if (frameCount % 30 == 0)
         {
-            papersToGrade += numClasses; 
+            papersToGrade += numClasses;
 
-            
+
             if(numEmployees > papersToGrade)
             {
                 papersGraded += papersToGrade;
@@ -317,7 +427,7 @@ function loop()
                 papersToGrade -= numEmployees;
             }
             //Assistants
-            if((numAssist*5) > papersToGrade)
+            if(numAssist*5 > papersToGrade)
             {
                 papersGraded += papersToGrade;
                 setDOM(element, "Brian has graded " + papersGraded + " assignment.");
@@ -348,14 +458,14 @@ function loop()
 
         if (frameCount % 90 == 0)
             setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
- 
+
 
         if ( currentDayOfTheWeek == "Thursday" && !isThursday)
             {
                 money += Math.floor(salary / 52);
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				isThursday = true;
-				
+
             }
 		if (currentDayOfTheWeek != "Thursday")
 			{
@@ -374,11 +484,11 @@ function calculatePapers()
             setDOM(element2, ("Brian has " +  papersToGrade + " assignments to grade."));
         }
     else
-        { 
+        {
             //element2.innerHTML = "Brian has " +  papersToGrade + " assignmets to grade.";
             setDOM(element2, "Brian has " +  papersToGrade + " assignments to grade.");
         }
-	
+
 
 }
 
@@ -394,19 +504,18 @@ function story()
 
     else if(papersGraded > 100)
         setDOM(element3, "Brian begins to look for help.")
-	
-	
-    
+
+
+
 }
 
 
-function setDOM(element, string) // pass an item in the DOM some text. 
+function setDOM(element, string) // pass an item in the DOM some text.
 {
-    element.innerHTML = string; 
+    element.innerHTML = string;
 }
 
 function setTitle(type,string)
 {
 	document.getElementById(type).title = string;
 }
-
