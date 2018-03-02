@@ -173,18 +173,18 @@ function upgrade(option)
 				money -= 1000;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + bhUpgrade + " upgrades.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("bhU","Costs $" + 1000 + ". Allows you grade assignments quicker.");
+				setTitle("bhU","Costs $" + 1000*(bhUpgrade+1)*1.173 + ". Allows you grade assignments quicker.");
 			}
 		}
 		else
 		{
-			if (money >= 1000)
+			if (money >= 1000*(bhUpgrade+1)*1.173)
 			{
 				bhUpgrade++;
 				money -= 1000*bhUpgrade*0.173;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + bhUpgrade + " upgrades.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("bhU","Costs $" + 1000*bhUpgrade*0.173 + ". Allows you grade assignments quicker.");
+				setTitle("bhU","Costs $" + 1000*bhUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
 		}
 	}
@@ -198,18 +198,18 @@ function upgrade(option)
 				money -= 1500;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + taUpgrade + " upgrades.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("taU","Costs $" + 1500 + ". Allows you grade assignments quicker.");
+				setTitle("taU","Costs $" + 1500*taUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
 		}
 		else
 		{
-			if (money >= 1500)
+			if (money >= 1500*(taUpgrade+1)*1.173)
 			{
 				taUpgrade++;
-				money -= 1500*taUpgrade*0.173;
+				money -= 1500*taUpgrade*1.173;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + taUpgrade + " upgrades.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("taU","Costs $" + 1500*taUpgrade*0.173 + ". Allows you grade assignments quicker.");
+				setTitle("taU","Costs $" + 1500*taUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
 		}
 	}
@@ -223,18 +223,18 @@ function upgrade(option)
 				money -= 150000;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + paUpgrade + " upgrades.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("paU","Costs $" + 150000 + ". Allows you grade assignments quicker.");
+				setTitle("paU","Costs $" + 150000*paUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
 		}
 		else
 		{
-			if (money >= 150000)
+			if (money >= 150000*(paUpgrade+1)*1.173)
 			{
 				paUpgrade++;
-				money -= 150000*paUpgrade*0.173;
+				money -= 150000*paUpgrade*1.173;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + paUpgrade + " upgrades.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("paU","Costs $" + 150000*paUpgrade*0.173 + ". Allows you grade assignments quicker.");
+				setTitle("paU","Costs $" + 150000*paUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
 		}
 	}
@@ -254,13 +254,13 @@ function upgrade(option)
 		}
 		else
 		{
-			if (money >= 3000000)
+			if (money >= 3000000*(grUpgrade+1)*1.173)
 			{
 				grUpgrade++;
-				money -= 3000000*grUpgrade*0.173;
+				money -= 3000000*grUpgrade*1.173;
 				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + grUpgrade + " upgrades.");
 				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("grU","Costs $" + 3000000*grUpgrade*0.173 + ". Allows you grade assignments quicker.");
+				setTitle("grU","Costs $" + 3000000*grUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
 		}
 	}
