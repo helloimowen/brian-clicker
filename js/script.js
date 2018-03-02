@@ -111,6 +111,8 @@ function moreClasses()
         listOfClasses.push(newClass);
 
         classChange = true; 
+		
+		salary = salary*1.75
     }
     else 
     {
@@ -129,6 +131,7 @@ function lessClasses()
         listOfClasses.pop();  
 
         classChange = true; 
+		salary = salary/1.75
     }
 }
 
