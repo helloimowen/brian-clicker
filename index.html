@@ -24,6 +24,12 @@
       background-color: #f5827d;
       padding: 10px 1px;
     }
+	.upgrade{
+      border: none;
+      background-color: #82f5e8;
+      padding: 16px 32px;
+
+    }
 
 
   </style>
@@ -51,16 +57,22 @@
   </script>
 
   <script type="text/javascript">
-  	//init(); 
+  	//init();
     loop();
 	</script>
 
   <button class = "button" onclick="grade();">Grade.</button>
-  </br>
-  <button class = "employee" onclick="hire(0);" title="Costs $100. Allows you to teach one more class.">Hire TA.</button>
-  <button class = "employee" onclick="hire(1);" title="Costs $1000. Allows you to teach three more classes.">Hire Personal Assistant.</button>
-  <button class = "employee" onclick="hire(2);" title="Costs $2000. Allows you to teach five more classes.">Order Grading Robot.</button>
 
+  </br>
+  <button class = "employee" onclick="hire(0);" id="ta" title="Costs $1000. Allows you to teach one more class.">Hire TA.</button>
+  <button class = "employee" onclick="hire(1);" id="pa" title="Costs $100000. Allows you to teach three more classes.">Hire Personal Assistant.</button>
+  <button class = "employee" onclick="hire(2);" id="rb" title="Costs $2000000. Allows you to teach five more classes.">Order Grading Robot.</button>
+
+  <br>
+  <button class = "upgrade" onclick="upgrade(0);" id="bhU" title="Costs $1000. Allows you grade assignments quicker.">Upgrade GPC</button>
+  <button class = "upgrade" onclick="upgrade(1);" id="taU" title="Costs $1500. Allows you grade assignments quicker.">Upgrade TA</button>
+  <button class = "upgrade" onclick="upgrade(2);" id="paU" title="Costs $150000. Allows you grade assignments quicker.">Upgrade PA</button>
+  <button class = "upgrade" onclick="upgrade(3);" id="rbU" title="Costs $3000000. Allows you grade assignments quicker.">Upgrade GR</button>
 
   <br>
   <button class="classInc" onclick="moreClasses();">Teach More</button>
