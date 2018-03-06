@@ -2,38 +2,38 @@
 <html>
 
 <!-- "Education is what you make of it."
-                           ./ssssssss-            
-                         :hy:`      :sy/          
-                        hh--/--:/.:/--+yh-        
-                        M- `----` `---. ho        
-                       /m``  -hyo-+o/:  h+        
-                       :m:ydmNsy+/:+ym+/M.        
-                        -ysNmd+-oso+hNNNy         
-                         `/NmmNmMNhmNMd-          
-                           /.`oo-My:.-/           
-                                `M.               
-                                sM+`              
-  ``                         `-soMyo.             
- `myso++++++++o-          `./o/.`M..s/`           
+                           ./ssssssss-
+                         :hy:`      :sy/
+                        hh--/--:/.:/--+yh-
+                        M- `----` `---. ho
+                       /m``  -hyo-+o/:  h+
+                       :m:ydmNsy+/:+ym+/M.
+                        -ysNmd+-oso+hNNNy
+                         `/NmmNmMNhmNMd-
+                           /.`oo-My:.-/
+                                `M.
+                                sM+`
+  ``                         `-soMyo.
+ `myso++++++++o-          `./o/.`M..s/`
  `M.``........ho        -/s+-   `M. `+o-   /soo//`
  `M``..`.```. yo    .:/sy/`     `M.   `/oysmmyyhM-
  `M`. B. R` H yo   `s+-.        `M.      hym/```N-
  `M`````````` yo                `M.      `+m:..+h`
- -Mo++++++++++ds                `M.        -++++` 
- ho...........-h/               `M`               
--N/---.````````.ho             /sh:               
--++++++ooooooooooo           `y+  oo.             
-                            .h/    `os.           
-                          `+s.       -h/          
-                         -h:          `d:         
-                       .o+`            `os.       
-                    `+s+`                -do.     
-                     .                     ::   
+ -Mo++++++++++ds                `M.        -++++`
+ ho...........-h/               `M`
+-N/---.````````.ho             /sh:
+-++++++ooooooooooo           `y+  oo.
+                            .h/    `os.
+                          `+s.       -h/
+                         -h:          `d:
+                       .o+`            `os.
+                    `+s+`                -do.
+                     .                     ::
 CSS Tag Info:
 https://www.w3schools.com/
 Flexbox help:
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-List of system fonts: 
+List of system fonts:
 https://atomiks.github.io/30-seconds-of-css/
 -->
 
@@ -46,111 +46,7 @@ https://atomiks.github.io/30-seconds-of-css/
   <meta name="author" content="Our great team">
   <meta name="description" content="Brian Hall clicker?">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-
-    div.overContainer{
-      display: flex;
-      justify-content: space-around;
-      
-    }
-   div.container{
-      display: flex;
-      flex-direction: row;
-      width: 80%;
-      flex-grow: 1;
-      flex-shrink: 1;
-      justify-content: space-between;
-    }
-
-    div.buttonContainer{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 80%;
-      flex-grow: 1;
-      flex-shrink: 1;
-      position: fixed;
-      bottom: 0;
-    }
-
-
-    .gradeButton{
-      background-color: #9bb899;
-      padding: 32px 5px;
-      border: 1px solid grey;
-    }
-
-    .employee{
-      background-color: #fcceaa;
-      padding: 5px 5px;
-      border: 1px solid grey;
-    }
-
-    .classInc{
-      background-color: #f5827d;
-      padding: 5px 5px;
-      border: 1px solid grey;
-    }
-
-    .buttonGroup, .buttonGroup2, .buttonGroup3 {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-      width: 40%;
-    }
-
-    .p{
-      font-size:2vw;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
-    .storybox
-    {
-      width: 60%;
-
-    }
-    .statsbox
-    {
-
-    }
-
-    p.season
-    {
-      font-size: 16px
-    }
-
-    body{
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
-      @media all and (max-width: 500px) {
-    div.container {
-      /* On small screens, we are no longer using row direction but column */
-      flex-direction: column;
-    }
-    .storybox
-      {
-        width: 100%;
-
-      }
-    div.buttonContainer
-    {
-        width: 100%;
-    }
-    .buttonGroup, .buttonGroup2, .buttonGroup3 {
-    
-      width: 49%;
-    }
-
-
-
-
-        .gradeButton{
-      background-color: #9bb899;
-      padding: 16px 5px;
-    }
-  }
-
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 
@@ -184,19 +80,19 @@ https://atomiks.github.io/30-seconds-of-css/
       </script>
 
       <script type="text/javascript">
-        //init(); 
+        //init();
         loop();
       </script>
     </div>
 
-    <div class = "buttonContainer">       
-    
-    
+    <div class = "buttonContainer">
+
+
       <button class = "gradeButton buttonGroup" id="sauce" style="visibility: hidden" onclick="makeSauce();" title="Make Barbecue Sauce.">Make sauce.</button>
       <div id = "buttonGroup">
         <button class = "gradeButton buttonGroup" id="grade" onclick="grade();" title="Grade a paper.">Grade.</button>
         <button class = "gradeButton buttonGroup" id="meeting" style="visibility: hidden" onclick="attendMeeting();">Attend Meeting.</button>
-        
+
       </div>
       </br>
       <div id = upgrades>
