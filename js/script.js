@@ -15,6 +15,8 @@ var employeeDom = document.getElementById("numEmployee");
 var pricePA = document.getElementById("pa");
 var priceRB = document.getElementById("rb");
 
+var empList = document.getElementById("employeeList");
+
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 
@@ -37,10 +39,10 @@ var overloadMax = 3;
     //brian begins making BBQ sauce. grading is replaced with barbeque sauce making.
     //Students work on making barbeque sauce. Students fall in vats of barbeque sauce.
 
-var classChange = true; 
+var classChange = true;
 var isThursday = false;
 var isMonday = false;
-var money = 0;  
+var money = 0;
 var currentDayOfTheWeek = "";
 var salary = 49000; // The very low end of a computer engineering salary.
 var numEmployees = 0;
@@ -49,21 +51,16 @@ var numRobot = 0;
 var meeting = false;
 var BBQ = 0;
 var numTas = 0;
-var taUpgrade = 0;
-var paUpgrade = 0;
-var grUpgrade = 0;
-var bhUpgrade = 0;
-var masterScale = 0.1;
 var taUpgradeCost = 1500;
 var paUpgradeCost = 200000;
 var grUpgradeCost = 3000000;
 var bhUpgradeCost = 1000;
 
-
-
-
-
-
+var employees = {
+	name: ['Brian Hall'],
+	level: ['lv. 1'],
+	upCost: [1000]
+};
 
 class seasons
 {
@@ -155,109 +152,13 @@ function lessClasses()
 
 // Upgrades
 
-function upgrade(option)
+function upgrade(x)
 {
-	if(option == 0)
-	{
-		if(bhUpgrade == 0)
-		{
-			if (money >= 1000)
-			{
-				bhUpgrade++;
-				money -= 1000;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + bhUpgrade + " upgrades.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("bhU","Costs $" + 1000 + ". Allows you grade assignments quicker.");
-			}
-		}
-		else
-		{
-			if (money >= 1000)
-			{
-				bhUpgrade++;
-				money -= 1000*bhUpgrade*0.173;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + bhUpgrade + " upgrades.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("bhU","Costs $" + 1000*bhUpgrade*0.173 + ". Allows you grade assignments quicker.");
-			}
-		}
-	}
-	if(option == 1)
-	{
-		if(taUpgrade == 0)
-		{
-			if (money >= 1500)
-			{
-				taUpgrade++;
-				money -= 1500;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + taUpgrade + " upgrades.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("taU","Costs $" + 1500 + ". Allows you grade assignments quicker.");
-			}
-		}
-		else
-		{
-			if (money >= 1500)
-			{
-				taUpgrade++;
-				money -= 1500*taUpgrade*0.173;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + taUpgrade + " upgrades.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("taU","Costs $" + 1500*taUpgrade*0.173 + ". Allows you grade assignments quicker.");
-			}
-		}
-	}
-	if(option == 2)
-	{
-		if(paUpgrade == 0)
-		{
-			if (money >= 150000)
-			{
-				paUpgrade++;
-				money -= 150000;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + paUpgrade + " upgrades.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("paU","Costs $" + 150000 + ". Allows you grade assignments quicker.");
-			}
-		}
-		else
-		{
-			if (money >= 150000)
-			{
-				paUpgrade++;
-				money -= 150000*paUpgrade*0.173;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + paUpgrade + " upgrades.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("paU","Costs $" + 150000*paUpgrade*0.173 + ". Allows you grade assignments quicker.");
-			}
-		}
-	}
-	if(option == 3)
-	{
-		grUpgrade++;
-		if(grUpgrade == 0)
-		{
-			if (money >= 3000000)
-			{
-				grUpgrade++;
-				money -= 3000000;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + grUpgrade + " upgrades.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("grU","Costs $" + 3000000 + ". Allows you grade assignments quicker.");
-			}
-		}
-		else
-		{
-			if (money >= 3000000)
-			{
-				grUpgrade++;
-				money -= 3000000*grUpgrade*0.173;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees with " + grUpgrade + " upgrades.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("grU","Costs $" + 3000000*grUpgrade*0.173 + ". Allows you grade assignments quicker.");
-			}
-		}
-	}
+	employees.name.push("John Doe");
+	console.log(employees.name[0]);
+	console.log(employees.name[1]);
+
+
 }
 
 // END
@@ -295,7 +196,7 @@ function hire(x)
 
     if (x == 0)
     {
-         
+
         if(numTas==0)
         {
             if (money >= 1000)
@@ -322,15 +223,15 @@ function hire(x)
                 overloadMax += 1;
             }
         }
-        
+
     }
     else if (x == 1)
     {
-        
+
         if(numAssist==0)
         {
              if (money >= 100000)
-            {   
+            {
                 numEmployees++;
                 numAssist++;
                 money -= 100000;
@@ -369,13 +270,13 @@ function hire(x)
                 setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
                 setDOM(salaryDom,("Brian has $" + money + "."));
                 setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
-                overloadMax += 5; 
+                overloadMax += 5;
             }
         }
         else
         {
             if (money >= 2000000*(numRobot)*1.753)
-            {                
+            {
                 money -= 2000000*numRobot*1.753;
                 numEmployees++;
                 numRobot++;
@@ -384,7 +285,7 @@ function hire(x)
                 setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
                 setDOM(salaryDom,("Brian has $" + money + "."));
                 setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
-                overloadMax += 5; 
+                overloadMax += 5;
             }
         }
 
@@ -393,15 +294,15 @@ function hire(x)
 
 
 function loop()
-{   
+{
     console.log("If you type anything into the console I will stand outside of your house and I will scream and I will not stop screaming until you apologise.")
 
-    setInterval(function(){ // 30 ticks / second game loop. 
-        frameCount++; 
-        
+    setInterval(function(){ // 30 ticks / second game loop.
+        frameCount++;
+
         if (frameCount % 90 == 0)
             setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
- 
+
         if(currentSeason == "Summer")
         {
             document.getElementById("grade").style.visibility = "hidden";
@@ -420,17 +321,17 @@ function loop()
             document.getElementById("buttonGroup2").style.visibility = "visible";
             document.getElementById("buttonGroup3").style.visibility = "visible";
             document.getElementById("buttonGroup4").style.visibility = "visible";
-            
+
             if(classChange)
             {
-                classChange = false; 
+                classChange = false;
 
                 var names  = listOfClasses[0]
 
 
                 for(var i = 1; i < listOfClasses.length; i++)
-                    
-                    names = names + " - " + listOfClasses[i]; 
+
+                    names = names + " - " + listOfClasses[i];
 
                 setDOM(classListDom, "Brian is taking on: " + names);
 
@@ -442,9 +343,9 @@ function loop()
 
             if (frameCount % 30 == 0)
             {
-                papersToGrade += numClasses; 
+                papersToGrade += numClasses;
 
-                
+
                 if(numEmployees > papersToGrade)
                 {
                     papersGraded += papersToGrade;
@@ -492,7 +393,7 @@ function loop()
                     money += Math.floor(salary / 52);
                     setDOM(salaryDom,("Brian has $" + money + "."));
                     isThursday = true;
-                    
+
                 }
             if (currentDayOfTheWeek != "Thursday")
                 {
@@ -570,56 +471,56 @@ function story()
 
     else if(papersGraded > 100 && papersGraded < 400)
         setDOM(element3, "Brian begins to look for help.")
-    
+
     else if(papersGraded > 500 && papersGraded < 900)
         setDOM(element3, "Brian dreams of barbecue sauce.")
-    
+
     else if(papersGraded > 1000 && papersGraded < 4000)
         setDOM(element3, "One Thousand assignments. A milestone in Brian's career.")
-    
+
     else if(papersGraded > 5000 && papersGraded < 9000)
         setDOM(element3, "Grading five thousand assignments has really taken its toll on Brain.")
-    
+
     else if(papersGraded > 10000 && papersGraded < 40000)
         setDOM(element3, "Brian has graded 10,000 assignments. If he isn't tenured yet, he should be.")
-    
-    
+
+
     //amount of work to do
     if(papersToGrade > 10000)
         setDOM(element4, "Wei would be very disappointed. Or not, I can't speak for Wei. I'm a line of Javascript, for goodness sake.")
-    
+
     else if(papersToGrade > 5000)
         setDOM(element4, "I'm surprised he hasn't been fired yet.")
-    
+
     else if(papersToGrade > 1000)
         setDOM(element4, "Brian is crying. How could you do this?")
-    
+
     else if(papersToGrade > 500)
         setDOM(element4, "This is getting out of hand.")
-    
+
     else if(papersToGrade > 100)
         setDOM(element4, "Brian needs to get to work. He's feeling stressed.")
-        
+
     else if(papersToGrade > 50)
-        setDOM(element4, "Brian's got some work to do.")    
-        
+        setDOM(element4, "Brian's got some work to do.")
+
     else if(papersToGrade > 10)
         setDOM(element4, "Brian needs to get to work.")
-        
+
     else if(papersToGrade <= 5)
         setDOM(element4, "Brian is feeling relaxed.")
-    
-    
+
+
     //Meetings: planned meetings, show countdown then reveal button. If not clicked, add assignments/penalize
-    
-    
+
+
     if (currentDayOfTheWeek == "Monday" && !isMonday)
     {
         document.getElementById("meeting").style.visibility = "visible";
         isMonday = true;
         meeting = true;
     }
-    
+
     if (currentDayOfTheWeek != "Monday")
     {
         isMonday = false;
@@ -629,10 +530,10 @@ function story()
             meeting = false;
             document.getElementById("meeting").style.visibility = "hidden";
 
-            
+
         }
     }
-    
+
 
 }
 
