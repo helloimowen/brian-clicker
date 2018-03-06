@@ -168,15 +168,9 @@ function generateEmployee()
 
 	var junkNode = document.createElement("LI");
 	junkNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>Lv. ' + level +
-	'</br>' + '<button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div>';
+	'</br><button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div>';
 
 	empList.appendChild(junkNode);
-
-	//var str = '<li><div class="employeeInside"><p>' +
-	//toString(name) + '</br>' + toString(level) + '</br>' +
-	//+ '<button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div></li>';
-
-	//empList.innerHTML += str;
 }
 
 // END
