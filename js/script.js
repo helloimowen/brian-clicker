@@ -163,11 +163,12 @@ function generateEmployee()
 	employees.level.push("lv. 1");
 	employees.upCost.push(1000);
 
-	var name = employees.name[numEmployee-1];
-	var level = employees.level[numEmployee-1];
+	var name = employees.name[numEmployees];
+	var level = employees.level[numEmployees];
 
 	var junkNode = document.createElement("LI");
-	junkNode.innerHTML = '<div class="employeeInside">' + name + '</div>';
+	junkNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>' + level +
+	'</br>' + '<button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div>';
 
 	empList.appendChild(junkNode);
 
