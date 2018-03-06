@@ -166,11 +166,16 @@ function generateEmployee()
 	var name = employees.name[numEmployee-1];
 	var level = employees.level[numEmployee-1];
 
-	var str = '<li><div class="employeeInside"><p>' +
-	toString(name) + '</br>' + toString(level) + '</br>' +
-	+ '<button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div></li>';
+	var junkNode = document.createElement("LI");
+	junkNode.innerHTML = '<div class="employeeInside">' + name + '</div>';
 
-	empList.innerHTML += str;
+	empList.appendChild(junkNode);
+
+	//var str = '<li><div class="employeeInside"><p>' +
+	//toString(name) + '</br>' + toString(level) + '</br>' +
+	//+ '<button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div></li>';
+
+	//empList.innerHTML += str;
 }
 
 // END
