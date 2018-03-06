@@ -89,8 +89,19 @@ function checkSave()
         setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
         setDOM(salaryDom,("Brian has $" + money + "."));
         //setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
-        //setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes.");
+        //setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes."); // not working ? 
         //setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
+        setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
+
+        classChange = false; 
+
+        var names  = listOfClasses[0];
+
+        for(var i = 1; i < listOfClasses.length; i++)
+            
+            names = names + " - " + listOfClasses[i]; 
+
+        setDOM(classListDom, "Brian is taking on: " + names);
     }
 }
 
