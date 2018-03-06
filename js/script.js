@@ -50,6 +50,81 @@ var BBQ = 0;
 var numTas = 0;
 
 
+function checkSave() 
+{
+    if(localStorage.getItem("numClasses"))
+    {
+
+        numClasses = parseInt(localStorage.getItem("numClasses"));
+
+        for (i = 0; i < numClasses; i++)
+            {
+                item = "listOfClasses" + i; 
+                newClass = localStorage.getItem(item);
+                listOfClasses.push(newClass);
+            }
+
+
+
+        numClasses = parseInt(localStorage.getItem("numClasses"));
+        overloadMax = parseInt(localStorage.getItem("overloadMax"));
+        classChange = (localStorage.getItem("classChange") == 'true'); // parse bool 
+        isThursday = (localStorage.getItem("isThursday") == 'true');
+        isMonday = (localStorage.getItem("isMonday") == 'true');
+        money = parseInt(localStorage.getItem("money"));
+        currentDayOfTheWeek = localStorage.getItem("currentDayOfTheWeek");
+        salary = parseInt(localStorage.getItem("salary"));
+        numEmployees = parseInt(localStorage.getItem("numEmployees"));
+        numAssist = parseInt(localStorage.getItem("numAssist"));
+        numRobot = parseInt(localStorage.getItem("numRobot"));
+        meeting = (localStorage.getItem("meeting") == 'true');
+        BBQ = parseInt(localStorage.getItem("BBQ"));    
+        numTas = parseInt(localStorage.getItem("numTas")); 
+        papersToGrade = parseInt(localStorage.getItem("papersToGrade"));    
+        papersGraded = parseInt(localStorage.getItem("papersGraded"));    
+        frameCount = parseInt(localStorage.getItem("frameCount")); 
+
+        // set some dom elements:
+        setDOM(element, "Brian has graded " + papersGraded + " assignment.");
+        setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
+        setDOM(salaryDom,("Brian has $" + money + "."));
+        //setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
+        //setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes.");
+        //setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
+    }
+}
+
+function save()
+{
+    localStorage.setItem("numClasses", numClasses);
+    for (i = 0; i < numClasses; i++)
+    {
+        item = "listOfClasses" + i; 
+        localStorage.setItem(item, listOfClasses[i]);
+    }
+
+    localStorage.setItem("listOfClasses", listOfClasses);
+
+    localStorage.setItem("overloadMax", overloadMax);
+    localStorage.setItem("classChange", classChange);
+    localStorage.setItem("isThursday", isThursday);
+    localStorage.setItem("isMonday", isMonday);
+    localStorage.setItem("money", money);
+    localStorage.setItem("currentDayOfTheWeek", currentDayOfTheWeek);
+    localStorage.setItem("salary", salary);
+    localStorage.setItem("numEmployees", numEmployees);
+    localStorage.setItem("numAssist", numAssist);
+    localStorage.setItem("numRobot", numRobot);  
+    localStorage.setItem("meeting", meeting);
+    localStorage.setItem("BBQ", BBQ);
+    localStorage.setItem("numTas", numTas);
+    localStorage.setItem("papersToGrade", papersToGrade);
+    localStorage.setItem("papersGraded", papersGraded);
+    localStorage.setItem("frameCount", frameCount);
+}
+
+
+
 
 
 
@@ -140,13 +215,6 @@ function lessClasses()
 }
 
 // END 
-
-
-
-
-
-
-
 
 
 
@@ -276,9 +344,13 @@ function hire(x)
 }
 
 
+
+
 function loop()
 {   
-    console.log("If you type anything into the console I will stand outside of your house and I will scream and I will not stop screaming until you apologise.")
+    console.log("If you type anything into the console I will stand outside of your house and I will scream and I will not stop screaming until you apologise.");
+
+    checkSave(); 
 
     setInterval(function(){ // 30 ticks / second game loop. 
         frameCount++; 
@@ -307,7 +379,7 @@ function loop()
             {
                 classChange = false; 
 
-                var names  = listOfClasses[0]
+                var names  = listOfClasses[0];
 
                 for(var i = 1; i < listOfClasses.length; i++)
                     
@@ -489,13 +561,17 @@ function story()
     }
     
     if (currentDayOfTheWeek != "Monday")
-    {
+    {   
+
+        save(); 
+
         isMonday = false;
         if (meeting == true)
         {
             papersToGrade += 50;
             meeting = false;
             document.getElementById("meeting").style.visibility = "hidden";
+            
 
             
         }
