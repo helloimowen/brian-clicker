@@ -58,7 +58,7 @@ var bhUpgradeCost = 1000;
 
 var employees = {
 	name: ['Brian Hall'],
-	level: ['lv. 1'],
+	level: [1],
 	upCost: [1000]
 };
 
@@ -160,14 +160,14 @@ function upgrade(x)
 function generateEmployee()
 {
 	employees.name.push(chance.name());
-	employees.level.push("lv. 1");
+	employees.level.push(1);
 	employees.upCost.push(1000);
 
 	var name = employees.name[numEmployees];
 	var level = employees.level[numEmployees];
 
 	var junkNode = document.createElement("LI");
-	junkNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>' + level +
+	junkNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>Lv. ' + level +
 	'</br>' + '<button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div>';
 
 	empList.appendChild(junkNode);
