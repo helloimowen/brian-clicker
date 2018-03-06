@@ -154,11 +154,23 @@ function lessClasses()
 
 function upgrade(x)
 {
-	employees.name.push("John Doe");
-	console.log(employees.name[0]);
-	console.log(employees.name[1]);
 
+}
 
+function generateEmployee()
+{
+	employees.name.push(chance.name());
+	employees.level.push("lv. 1");
+	employees.upCost.push(1000);
+
+	var name = employees.name[numEmployee-1];
+	var level = employees.level[numEmployee-1];
+
+	var str = '<li><div class="employeeInside"><p>' +
+	toString(name) + '</br>' + toString(level) + '</br>' +
+	+ '<button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div></li>';
+
+	empList.innerHTML += str;
 }
 
 // END
@@ -208,6 +220,7 @@ function hire(x)
                 setDOM(salaryDom,("Brian has $" + money + "."));
                 setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
                 overloadMax += 1;
+								generateEmployee();
             }
         }
         else
@@ -221,6 +234,7 @@ function hire(x)
                 setDOM(salaryDom,("Brian has $" + money + "."));
                 setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
                 overloadMax += 1;
+								generateEmployee();
             }
         }
 
