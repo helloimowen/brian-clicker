@@ -52,7 +52,9 @@ var BBQ = 0;
 var numTas = 0;
 var books = 0;
 var width = 0;
-var elem = document.getElementById("myBar"); 
+var stressWidth = 0;
+var bookProgress = document.getElementById("myBar"); 
+var stressLevel = document.getElementById("stressBar"); 
 
 
 function checkSave() 
@@ -91,6 +93,7 @@ function checkSave()
         frameCount = parseInt(localStorage.getItem("frameCount")); 
         books = parseInt(localStorage.getItem("books")); 
         width = parseInt(localStorage.getItem("width")); 
+        stressWidth = parseInt(localStorage.getItem("stressWidth"));
 
         // set some dom elements:
         setDOM(element, "Brian has graded " + papersGraded + " assignment.");
@@ -100,8 +103,16 @@ function checkSave()
         //setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes."); // not working ? 
         //setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
         setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
-        elem.style.width = width + '%';
+        bookProgress.style.width = width + '%';
         setDOM(bookDom, "Books Written: " + books);
+        if (stressWidth > 100)
+        {
+            stressLevel.style.width = 100+ '%';
+        }
+        else
+        {
+            stressLevel.style.width = stressWidth + '%';
+        }
         
         if(currentSeason == "Summer")
         {
@@ -151,6 +162,7 @@ function save()
     localStorage.setItem("frameCount", frameCount);
     localStorage.setItem("books", books);
     localStorage.setItem("width", width);
+    localStorage.setItem("stressWidth", stressWidth);
 }
 
 
@@ -434,6 +446,7 @@ function loop()
 
             //call to story function
             story();
+            stress();
 
             if (frameCount % 30 == 0)
             {
@@ -616,7 +629,6 @@ function story()
             meeting = false;
             document.getElementById("meeting").style.visibility = "hidden";
             
-
             
         }
     }
@@ -634,9 +646,8 @@ function attendMeeting()
 function book()
 {
     if (width >= 100) {
-        console.log("Book")
         width = 1;
-        elem.style.width = width + '%'; 
+        bookProgress.style.width = width + '%'; 
         books++;
         setDOM(bookDom, "Books Written: " + books);
         money += (books+1)*150;
@@ -644,9 +655,31 @@ function book()
     }
     else
     {
-        console.log("Book2")
         width++; 
-        elem.style.width = width + '%';
+        bookProgress.style.width = width + '%';
+    }
+}
+
+function stress()
+{
+    if (numEmployees < 1)
+    {
+        stressWidth = papersToGrade;
+    }
+    else 
+    {
+        stressWidth = (papersToGrade/numEmployees);
+    }
+    if (stressWidth >= 100) {
+        if(currentDayOfTheWeek == "Monday")
+        {
+            money -= 2; //spends lots of money really quickly due to loop, may be fine as it has nice visual effect
+            setDOM(salaryDom,("Brian has $" + money + "."));
+        }
+    }
+    else
+    {
+        stressLevel.style.width = stressWidth + '%';
     }
 }
 
