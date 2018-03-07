@@ -673,6 +673,7 @@ function stress()
     if (stressWidth >= 100) {
         if(currentDayOfTheWeek == "Monday")
         {
+            stressLevel.style.width = 100 + '%';
             money -= 2; //spends lots of money really quickly due to loop, may be fine as it has nice visual effect
             setDOM(salaryDom,("Brian has $" + money + "."));
         }
