@@ -134,6 +134,7 @@ function save()
     localStorage.setItem("overloadMax", overloadMax);
     localStorage.setItem("classChange", classChange);
     localStorage.setItem("isThursday", isThursday);
+    summer = !summer; //reverses summer to help with logic
     localStorage.setItem("summer", summer);
     localStorage.setItem("isMonday", isMonday);
     localStorage.setItem("money", money);
@@ -531,6 +532,8 @@ function summerStory()
         setDOM(element3, "The special ingredient... is love.");
     else if (BBQ >= 100 && BBQ <= 500)
         setDOM(element3, "Just how much is 100 sauce?");
+    
+    save();
 }
 
 function makeSauce()
