@@ -11,6 +11,7 @@ var seasonDom = document.getElementById("season");
 var classListDom = document.getElementById("classList"); 
 var overloadWarning = document.getElementById("overload"); 
 var employeeDom = document.getElementById("numEmployee");
+var bookDom = document.getElementById("booksWritten");
 
 var pricePA = document.getElementById("pa");
 var priceRB = document.getElementById("rb");
@@ -46,8 +47,12 @@ var numEmployees = 0;
 var numAssist = 0;
 var numRobot = 0;
 var meeting = false;
+var summer = false;
 var BBQ = 0;
 var numTas = 0;
+var books = 0;
+var width = 0;
+var elem = document.getElementById("myBar"); 
 
 
 function checkSave() 
@@ -71,6 +76,7 @@ function checkSave()
         classChange = (localStorage.getItem("classChange") == 'true'); // parse bool 
         isThursday = (localStorage.getItem("isThursday") == 'true');
         isMonday = (localStorage.getItem("isMonday") == 'true');
+        summer = (localStorage.getItem("summer") == 'true');
         money = parseInt(localStorage.getItem("money"));
         currentDayOfTheWeek = localStorage.getItem("currentDayOfTheWeek");
         salary = parseInt(localStorage.getItem("salary"));
@@ -83,6 +89,8 @@ function checkSave()
         papersToGrade = parseInt(localStorage.getItem("papersToGrade"));    
         papersGraded = parseInt(localStorage.getItem("papersGraded"));    
         frameCount = parseInt(localStorage.getItem("frameCount")); 
+        books = parseInt(localStorage.getItem("books")); 
+        width = parseInt(localStorage.getItem("width")); 
 
         // set some dom elements:
         setDOM(element, "Brian has graded " + papersGraded + " assignment.");
@@ -92,7 +100,14 @@ function checkSave()
         //setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes."); // not working ? 
         //setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
         setDOM( seasonDom, "It is currently the " + seasons.checkSeason(frameCount / 90) + ". " + seasons.checkDay((frameCount / 90) % 7) + " - day " + Math.floor(frameCount / 90) );
-
+        elem.style.width = width + '%';
+        setDOM(bookDom, "Books Written: " + books);
+        
+        if(currentSeason == "Summer")
+        {
+            setDOM(element2, "Brian has made " + BBQ + " BBQ sauce");
+        }
+        
         classChange = false; 
 
         var names  = listOfClasses[0];
@@ -119,6 +134,7 @@ function save()
     localStorage.setItem("overloadMax", overloadMax);
     localStorage.setItem("classChange", classChange);
     localStorage.setItem("isThursday", isThursday);
+    localStorage.setItem("summer", summer);
     localStorage.setItem("isMonday", isMonday);
     localStorage.setItem("money", money);
     localStorage.setItem("currentDayOfTheWeek", currentDayOfTheWeek);
@@ -132,6 +148,8 @@ function save()
     localStorage.setItem("papersToGrade", papersToGrade);
     localStorage.setItem("papersGraded", papersGraded);
     localStorage.setItem("frameCount", frameCount);
+    localStorage.setItem("books", books);
+    localStorage.setItem("width", width);
 }
 
 
@@ -371,20 +389,32 @@ function loop()
  
         if(currentSeason == "Summer")
         {
-            document.getElementById("grade").style.visibility = "hidden";
-            document.getElementById("sauce").style.visibility = "visible";
-            document.getElementById("buttonGroup").style.visibility = "hidden";
-            document.getElementById("buttonGroup2").style.visibility = "hidden";
-            document.getElementById("buttonGroup3").style.visibility = "hidden";
+            if (summer == false)
+            {
+                document.getElementById("grade").style.visibility = "hidden";
+                document.getElementById("sauce").style.visibility = "visible";
+                document.getElementById("buttonGroup").style.visibility = "hidden";
+                document.getElementById("buttonGroup2").style.visibility = "hidden";
+                document.getElementById("buttonGroup3").style.visibility = "hidden";
+                summer = true;
+            }
             summerStory();
         }
         else
         {
-            document.getElementById("grade").style.visibility = "visible";
-            document.getElementById("sauce").style.visibility = "hidden";
-            document.getElementById("buttonGroup").style.visibility = "visible";
-            document.getElementById("buttonGroup2").style.visibility = "visible";
-            document.getElementById("buttonGroup3").style.visibility = "visible";
+            if (summer == true)
+            {
+                document.getElementById("grade").style.visibility = "visible";
+                document.getElementById("sauce").style.visibility = "hidden";
+                document.getElementById("buttonGroup").style.visibility = "visible";
+                document.getElementById("buttonGroup2").style.visibility = "visible";
+                document.getElementById("buttonGroup3").style.visibility = "visible";
+                summer = false;
+                
+                money += (BBQ*5);
+                setDOM(salaryDom,("Brian has $" + money + "."));
+                BBQ = 0;
+            }
             
             if(classChange)
             {
@@ -596,6 +626,25 @@ function attendMeeting()
     document.getElementById("meeting").style.visibility = "hidden";
     money += 100;
     setDOM(salaryDom,("Brian has $" + money + "."));
+}
+
+function book()
+{
+    if (width >= 100) {
+        console.log("Book")
+        width = 1;
+        elem.style.width = width + '%'; 
+        books++;
+        setDOM(bookDom, "Books Written: " + books);
+        money += (books+1)*150;
+        setDOM(salaryDom,("Brian has $" + money + "."));
+    }
+    else
+    {
+        console.log("Book2")
+        width++; 
+        elem.style.width = width + '%';
+    }
 }
 
 function setDOM(element, string) // pass an item in the DOM some text. 

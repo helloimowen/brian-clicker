@@ -23,6 +23,19 @@
       position: fixed;
       bottom: 0;
     }
+    
+    #myProgress {
+        width: 100%;
+        background-color: grey;
+        text-align: center; /* To center it horizontally (if you want) */
+        line-height: 30px; /* To center it vertically */
+        color: white;
+    }
+    #myBar {
+        width: 0%;
+        height: 30px;
+        background-color: green;
+    }
 
 
     .gradeButton{
