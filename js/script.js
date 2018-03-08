@@ -166,7 +166,76 @@ function save()
 }
 
 
+function reveal()
+{
 
+    //employee
+    //classInc
+    //stressText
+    //booksWriten 
+
+    if (papersGraded >= 10)
+    {
+        document.getElementById("papersGraded").style.visibility = "visible";
+        document.getElementById("papersGraded").style.animation = "fadein 10s";
+    }
+
+    if (money > 20)
+    {
+        document.getElementById("money").style.visibility = "visible";
+        document.getElementById("money").style.animation = "fadein 10s";
+    }
+    if (money > 1000)
+    {
+        document.getElementById("ta").style.visibility = "visible";
+        document.getElementById("ta").style.animation = "fadein 10s";
+        document.getElementById("pa").style.visibility = "visible";
+        document.getElementById("pa").style.animation = "fadein 10s";
+        document.getElementById("rb").style.visibility = "visible";
+        document.getElementById("rb").style.animation = "fadein 10s";
+    }
+    if (numEmployees >= 1)
+    {
+        document.getElementById("numEmployee").style.visibility = "visible";
+        document.getElementById("numEmployee").style.animation = "fadein 10s";
+    }
+
+    if(stressWidth >= 50)
+    {
+        document.getElementById("stressBar").style.visibility = "visible";
+        document.getElementById("stressBar").style.animation = "fadein 10s";
+        document.getElementById("stressProgress").style.visibility = "visible";
+        document.getElementById("stressProgress").style.animation = "fadein 10s";
+        document.getElementById("stressText").style.visibility = "visible";
+        document.getElementById("stressText").style.animation = "fadein 10s";                
+    }
+
+    if(frameCount >= 4000)
+    {
+        document.getElementById("myProgress").style.visibility = "visible";
+        document.getElementById("myProgress").style.animation = "fadein 10s";
+        document.getElementById("booksWritten").style.visibility = "visible";
+        document.getElementById("booksWritten").style.animation = "fadein 10s";
+        document.getElementById("myBar").style.visibility = "visible";
+        document.getElementById("myBar").style.animation = "fadein 10s"; 
+        document.getElementById("book").style.visibility = "visible";
+        document.getElementById("book").style.animation = "fadein 10s"; 
+    }
+
+    if(numEmployees >= 1)
+    {
+        document.getElementById("more").style.visibility = "visible";
+        document.getElementById("more").style.animation = "fadein 10s";
+        document.getElementById("less").style.visibility = "visible";
+        document.getElementById("less").style.animation = "fadein 10s";
+    }
+
+    if(numClasses > 1)
+    {
+        document.getElementById("classList").style.visibility = "visible";
+        document.getElementById("classList").style.animation = "fadein 10s";
+    }
+}
 
 
 
@@ -447,6 +516,7 @@ function loop()
             //call to story function
             story();
             stress();
+            reveal();
 
             if (frameCount % 30 == 0)
             {
@@ -610,7 +680,7 @@ function story()
     //Meetings: planned meetings, show countdown then reveal button. If not clicked, add assignments/penalize
     
     
-    if (currentDayOfTheWeek == "Monday" && !isMonday)
+    if (currentDayOfTheWeek == "Monday" && !isMonday && frameCount > 2000) //does not trigger for a few weeks. 
     {
         document.getElementById("meeting").style.visibility = "visible";
         isMonday = true;
