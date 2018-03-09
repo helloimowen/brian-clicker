@@ -127,7 +127,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
-      @media all and (max-width: 700px) {
+    @media all and (max-width: 700px) {
     div.container {
       /* On small screens, we are no longer using row direction but column */
       flex-direction: column;
@@ -151,17 +151,41 @@
     ul#employeeList li {
     text-align: center; 
     display: block;
-    border: 1px solid grey;
     float: left;
     padding: 0px 0px;
     font-size: 10px;
     }
-
+    ul#employeeList {
+      padding: 0px 0px;
+    }
 
         .gradeButton{
       background-color: #9bb899;
       padding: 16px 5px;
     }
+
+    div.overContainer{
+      justify-content: center;
+      
+    }
+    div.container{
+      justify-content: center;
+    }
+      p{
+      font-size:12px;
+    }
+    .upgrade{
+      font-size:12px;
+    }
+    .buttonGroup{
+      font-size: 12px;
+    }
+
+        #season
+    {
+      font-size: 16px
+    }
+
   }
 
 
