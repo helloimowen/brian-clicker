@@ -1,0 +1,196 @@
+
+    div.overContainer{
+      display: flex;
+      justify-content: space-around;
+      
+    }
+   div.container{
+      display: flex;
+      flex-direction: row;
+      width: 80%;
+      flex-grow: 1;
+      flex-shrink: 1;
+      justify-content: space-between;
+    }
+
+    div.buttonContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 80%;
+      flex-grow: 1;
+      flex-shrink: 1;
+      position: fixed;
+      bottom: 0;
+    }
+    
+    #myProgress {
+        width: 100%;
+        background-color: grey;
+        text-align: center; 
+        line-height: 30px; 
+        color: white;
+        visibility: hidden;
+    }
+
+    #myBar {
+        width: 0%;
+        height: 30px;
+        background-color: green;
+        visibility: hidden;
+    }
+
+
+
+    #stressProgress {
+        width: 40%;
+        background-color: grey;
+        text-align: center; 
+        line-height: 30px; 
+        color: white;
+        visibility: hidden;
+    }
+    #stressBar {
+        width: 0%;
+        height: 30px;
+        background-color: red;
+        visibility: hidden;
+    }
+
+    
+    #papersToGrade{
+      animation-timing-function: ease-in;
+      animation: fadein 10s; 
+    }
+
+    #stressText, #booksWritten, 
+    #ta, #pa, #rb, #money, 
+    #numEmployee, #papersGraded, 
+    #classList, #work, #book, 
+    #more, #less, #bhU, #taU, 
+    #paU, #rbU, #employeeList {
+        visibility: hidden;  
+    }
+
+    .gradeButton{
+      background-color: #9bb899;
+      padding: 32px 5px;
+      border: 1px solid grey;
+      animation-timing-function: ease-in;
+      animation: fadein 10s; 
+    }
+
+    .employee{
+      background-color: #fcceaa;
+      padding: 5px 5px;
+      border: 1px solid grey;
+
+    }
+
+    .classInc{
+      background-color: #f5827d;
+      padding: 5px 5px;
+      border: 1px solid grey;
+    }
+
+
+
+    .buttonGroup, .buttonGroup2, 
+    .buttonGroup3, .buttonGroup4 {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      width: 40%;
+    }
+
+    .p{
+      font-size:2vw;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .storybox
+    {
+      width: 60%;
+      animation: fadein 2s; 
+
+    }
+    .statsbox
+    {
+
+    }
+
+    p.season
+    {
+      font-size: 16px
+      animation: fadein 2s; 
+    }
+
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+      @media all and (max-width: 700px) {
+    div.container {
+      /* On small screens, we are no longer using row direction but column */
+      flex-direction: column;
+    }
+    .storybox
+      {
+        width: 100%;
+
+      }
+    div.buttonContainer
+    {
+        width: 100%;
+    }
+    .buttonGroup, .buttonGroup2, .buttonGroup3 {
+      width: 49%;
+    }
+    #stressProgress {
+        width: 100%;
+      }
+
+    ul#employeeList li {
+    text-align: center; 
+    display: block;
+    border: 1px solid grey;
+    float: left;
+    padding: 0px 0px;
+    font-size: 10px;
+    }
+
+
+        .gradeButton{
+      background-color: #9bb899;
+      padding: 16px 5px;
+    }
+  }
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+  ul#employeeList {
+    list-style: none;
+    padding: 3px 3px;
+    margin-left: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  ul#employeeList li{
+    display: flex;
+    padding: 5px 10px;
+  }
+
+  #eList{
+
+  }
+
+    .upgrade{
+      border: none;
+      background-color: #82f5e8;
+      padding: 5px 5px;
+      border: 1px solid grey;
+
+    }
