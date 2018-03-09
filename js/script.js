@@ -15,7 +15,9 @@ var employeeDom = document.getElementById("numEmployee");
 var pricePA = document.getElementById("pa");
 var priceRB = document.getElementById("rb");
 
-var empList = document.getElementById("employeeList");
+var empTaList = document.getElementById("taList");
+var empPaList = document.getElementById("paList");
+var empGrList = document.getElementById("grList");
 
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
@@ -51,13 +53,24 @@ var numRobot = 0;
 var meeting = false;
 var BBQ = 0;
 var numTas = 0;
-var taUpgradeCost = 1500;
-var paUpgradeCost = 200000;
-var grUpgradeCost = 3000000;
-var bhUpgradeCost = 1000;
+var numTasList = 1;
+var numPasList = 0;
+var numGrsList = 0;
 
-var employees = {
+var taEmployees = {
 	name: ['Brian Hall'],
+	level: [1],
+	upCost: [1000]
+};
+
+var paEmployees = {
+	name: [''],
+	level: [1],
+	upCost: [1000]
+};
+
+var grEmployees = {
+	name: [''],
 	level: [1],
 	upCost: [1000]
 };
@@ -152,25 +165,123 @@ function lessClasses()
 
 // Upgrades
 
-function upgrade(x)
+function upgrade(x,emp)
 {
+	if(x==0)
+	{
+		if(money >= taEmployees.upCost[emp])
+		{
+			taEmployees.level[emp]++;
+			money -= taEmployees.upCost[emp];
 
+			taEmployees.upCost[emp] = taEmployees.upCost[emp]*2.2;
+		}
+	}
+	if(x==1)
+	{
+		if(money >= paEmployees.upCost[emp])
+		{
+			paEmployees.level[emp]++;
+			money -= paEmployees.upCost[emp];
+
+			paEmployees.upCost[emp] = paEmployees.upCost[emp]*2.2;
+		}
+	}
+	if(x==2)
+	{
+		if(money >= grEmployees.upCost[emp])
+		{
+			grEmployees.level[emp]++;
+			money -= grEmployees.upCost[emp];
+
+			grEmployees.upCost[emp] = grEmployees.upCost[emp]*2.2;
+		}
+	}
 }
 
-function generateEmployee()
+function getTaTotalUpgrades()
 {
-	employees.name.push(chance.name());
-	employees.level.push(1);
-	employees.upCost.push(1000);
+	var total = 0;
+	for(i = 1; i < numTas; i++)
+	{
+		total += taEmployees.level[i];
+	}
+	total -= numTas;
+	return total;
+}
 
-	var name = employees.name[numEmployees];
-	var level = employees.level[numEmployees];
+function getPaTotalUpgrades()
+{
+	var total = 0;
+	for(i = 0; i < numPas; i++)
+	{
+		total += paEmployees.level[i];
+	}
+	total -= numPas;
+	return total;
+}
 
-	var junkNode = document.createElement("LI");
-	junkNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>Lv. ' + level +
-	'</br><button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div>';
+function getGrTotalUpgrades()
+{
+	var total = 0;
+	for(i = 0; i < numGrs; i++)
+	{
+		total += grEmployees.level[i];
+	}
+	total -= numGrs;
+	return total;
+}
 
-	empList.appendChild(junkNode);
+function generateEmployee(x)
+{
+	if(x==0)
+	{
+		taEmployees.name.push(chance.name());
+		taEmployees.level.push(1);
+		taEmployees.upCost.push(1000);
+
+		var name = taEmployees.name[numTasList];
+		var level = taEmployees.level[numTasList];
+
+		var taNode = document.createElement("LI");
+		taNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>Lv. ' + level +
+		'</br><button class="upgrade" onclick="upgrade(0,' + numTasList + ')">Upgrade</button></p></div>';
+
+		empList.appendChild(taNode);
+		numTasList++;
+	}
+	if(x==1)
+	{
+		paEmployees.name.push(chance.name());
+		paEmployees.level.push(1);
+		paEmployees.upCost.push(3000);
+
+		var name = paEmployees.name[numPasList];
+		var level = paEmployees.level[numPasList];
+
+		var paNode = document.createElement("LI");
+		paNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>Lv. ' + level +
+		'</br><button class="upgrade" onclick="upgrade(1,' + numPasList + ')">Upgrade</button></p></div>';
+
+		empList.appendChild(paNode);
+		numPasList++;
+	}
+	if(x==2)
+	{
+		grEmployees.name.push(chance.name());
+		grEmployees.level.push(1);
+		grEmployees.upCost.push(10000);
+
+		var name = grEmployees.name[numGrsList];
+		var level = grEmployees.level[numGrsList];
+
+		var grNode = document.createElement("LI");
+		grNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>Lv. ' + level +
+		'</br><button class="upgrade" onclick="upgrade(2,' + numGrsList + ')">Upgrade</button></p></div>';
+
+		empList.appendChild(grNode);
+		numGrsList++;
+	}
 }
 
 // END
@@ -220,7 +331,7 @@ function hire(x)
                 setDOM(salaryDom,("Brian has $" + money + "."));
                 setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
                 overloadMax += 1;
-								generateEmployee();
+				generateEmployee();
             }
         }
         else
@@ -234,7 +345,7 @@ function hire(x)
                 setDOM(salaryDom,("Brian has $" + money + "."));
                 setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
                 overloadMax += 1;
-								generateEmployee();
+				generateEmployee();
             }
         }
 

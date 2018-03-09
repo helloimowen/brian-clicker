@@ -124,21 +124,17 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
-	ul#employeeList {
+	ul.employeeList {
 		list-style: none;
 		padding: 3px 3px;
 		margin-left: 0;
 		box-sizing: border-box;
 	}
 
-	ul#employeeList li{
+	ul.employeeList li{
 		display: flex;
 		border: 2px solid grey;
 		padding: 5px 10px;
-	}
-
-	#eList{
-
 	}
 
     @media all and (max-width: 500px) {
@@ -196,12 +192,35 @@
       </div>
 
 	  <div class="eList">
-		  <ul id="employeeList">
+		  <h4>TA's</h4>
+		  <ul class="employeeList" id="taList">
 			  <li><div class="employeeInside">
 				  <p>
 					  Brian Hall</br>
 					  Lv. 1</br>
 					  <button class="upgrade" onclick="upgrade(0)">Upgrade</button>
+				  </p>
+			  </div></li>
+		  </ul>
+		  <hr>
+		  <h4>Personal Assistant's</h4>
+		  <ul class="employeeList" id="paList">
+			  <li><div class="employeeInside">
+				  <p>
+					  Brian Hall</br>
+					  Lv. 1</br>
+					  <button class="upgrade" onclick="upgrade(1)">Upgrade</button>
+				  </p>
+			  </div></li>
+		  </ul>
+		  <hr>
+		  <h4>Grading Robots's</h4>
+		  <ul class="employeeList" id="grList">
+			  <li><div class="employeeInside">
+				  <p>
+					  Brian Hall</br>
+					  Lv. 1</br>
+					  <button class="upgrade" onclick="upgrade(2)">Upgrade</button>
 				  </p>
 			  </div></li>
 		  </ul>
