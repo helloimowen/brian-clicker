@@ -215,6 +215,8 @@ function reveal()
     {
         fadein("papersGraded");
     }
+    if (papersGraded >= 1)
+        fadein("work")
 
     if (money > 7)
     {
