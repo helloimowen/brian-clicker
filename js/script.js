@@ -1,3 +1,122 @@
+class assistant
+{
+	/*
+var incrementFactor = 0;
+var numUpgrades = 0; //number of upgrades bought
+var numChars = 0; //number of ta's bought
+var baseCost = 0;
+var currentCost = 0;
+var nextCost = 0;
+var baseNumAssignmentsThatCanBeDone = 0; //base amount that can be done by character
+var currentNumAssignmentsThatCanBeDone = 0;
+var baseUpgradeCost = 0;
+var currentUpgradeCost = 0;
+var nextUpgradeCost = 0;
+var overload = 0;*/
+
+
+constructor(baseNumAss,baseUpgradeCost, baseCost, overload)
+{
+	//num of upgrades and quantity
+	this.numUpgrades = 0;
+	this.numChars = 0;
+	this.overload = overload;
+	this.incrementFactor = 1.173;
+	//assign how many base assignments that can be done
+	this.baseNumAssignmentsThatCanBeDone = baseNumAss;
+	this.currentNumAssignmentsThatCanBeDone = baseNumAss;
+	//setting base cost and current cost of a single character
+	this.baseCost = baseCost;
+	this.currentCost = baseCost;
+	
+	//setting base upgrade cost and current upgrade cost of a single upgrade
+	this.baseUpgradeCost = baseUpgradeCost;
+	this.currentUpgradeCost = baseUpgradeCost;
+	
+	//setting the next price
+	this.nextUpgradeCost = this.baseUpgradeCost*10*(this.numUpgrades+1)*this.incrementFactor;
+	this.nextCost = (this.baseCost*10)*this.incrementFactor;
+	
+}
+
+//proccesses the upgrade of a character and updates the number of assignments 
+//that can be done with current information
+ addUpgrade()
+{
+	this.numUpgrades++;	
+	this.calculateNumAssignmentsThatCanBeGraded();
+}
+
+
+//proccesses the purchase of a character and updates the number of assignments 
+//that can be done with current information
+ addChars()
+{
+	this.numChars++;	
+	this.calculateNumAssignmentsThatCanBeGraded();
+		
+}
+
+//calculates how many assignments can be done
+ calculateNumAssignmentsThatCanBeGraded()
+{
+	this.currentNumAssignmentsThatCanBeDone = (this.numChars*this.baseNumAssignmentsThatCanBeDone)*(this.numUpgrades*1.5)
+}
+
+//returns how many assignments can currently be done
+ calculateGrade()
+{
+	return this.currentNumAssignmentsThatCanBeDone;
+}
+
+//sets after purchase
+ updatePrice()
+{
+	this.currentCost = this.nextCost;
+	this.nextCost = this.nextCost*this.incrementFactor
+}
+
+//sets after upgrade
+ updateUpgradePrice()
+{
+		this.currentUpgradeCost = this.nextUpgradeCost;
+		this.nextUpgradeCost = this.nextUpgradeCost*this.incrementFactor*10;
+}
+
+//return price of upgrade to remove from money
+ upgrade()
+{
+	this.addUpgrade();
+	var priceReturn = this.currentUpgradeCost;
+	this.updateUpgradePrice();
+	return priceReturn;
+}
+
+//return price of purchase to remove from Money
+ purchase()
+{
+	this.addChars();
+	var priceReturn = this.currentCost;
+	this.updatePrice();
+	return priceReturn;
+}
+
+//checks if you have enough money to upgrade
+ canUpgrade(currentMoney)
+{
+	return currentMoney >= this.currentUpgradeCost;
+}
+
+//checks if you have enough money to purchase
+ canPurchase(currentMoney)
+{
+	return currentMoney >= this.currentCost;
+}
+
+}
+
+
+
 var papersToGrade = 0;
 var papersGraded = 0;
 var frameCount = 0; // globals are good.
@@ -41,20 +160,15 @@ var money = 0;
 var currentDayOfTheWeek = "";
 var salary = 49000; // The very low end of a computer engineering salary.
 var numEmployees = 0;
-var numAssist = 0;
-var numRobot = 0;
-var numTas = 0;
-var taUpgrade = 0;
-var paUpgrade = 0;
-var grUpgrade = 0;
-var bhUpgrade = 0;
+
 var masterScale = 0.1;
-var taUpgradeCost = 1500;
-var paUpgradeCost = 200000;
-var grUpgradeCost = 3000000;
+
 var bhUpgradeCost = 1000;
 
-
+let bh = new assistant(1,10000,0,0);
+let ta = new assistant(1,1500,1000,1);
+let pa = new assistant(5,150000,100000,3);
+let rg = new assistant(10,3000000, 900000,5);
 
 
 
@@ -124,13 +238,11 @@ function moreClasses()
 
         listOfClasses.push(newClass);
 
-<<<<<<< HEAD
+
         classChange = true; 
 		
 		salary = salary*1.75
-=======
-        classChange = true;
->>>>>>> eed3b37f33f262880ced85552caf6f9632c7e815
+
     }
     else
     {
@@ -148,12 +260,10 @@ function lessClasses()
 
         listOfClasses.pop();
 
-<<<<<<< HEAD
+
         classChange = true; 
 		salary = salary/1.75
-=======
-        classChange = true;
->>>>>>> eed3b37f33f262880ced85552caf6f9632c7e815
+
     }
 }
 
@@ -165,7 +275,13 @@ function upgrade(option)
 {
 	if(option == 0)
 	{
-		if(bhUpgrade == 0)
+		
+		if(bh.canUpgrade(money))
+		{
+			money-=bh.upgrade();
+			setTitle("bhU","Costs $" + bh.nextUpgradeCost + ". Allows you grade assignments quicker.");
+		}
+		/*if(bhUpgrade == 0)
 		{
 			if (money >= 1000)
 			{
@@ -186,11 +302,18 @@ function upgrade(option)
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle("bhU","Costs $" + 1000*bhUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
-		}
+		}*/
 	}
 	if(option == 1)
 	{
-		if(taUpgrade == 0)
+		
+		if(ta.canUpgrade(money))
+		{
+			money-=ta.upgrade();
+			setTitle("taU","Costs $" + ta.nextUpgradeCost + ". Allows you grade assignments quicker.");
+
+		}
+		/*if(taUpgrade == 0)
 		{
 			if (money >= 1500)
 			{
@@ -211,11 +334,17 @@ function upgrade(option)
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle("taU","Costs $" + 1500*taUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
-		}
+		}*/
 	}
 	if(option == 2)
 	{
-		if(paUpgrade == 0)
+		if(pa.canUpgrade(money))
+		{
+			money-=pa.upgrade();
+			setTitle("paU","Costs $" + pa.nextUpgradeCost + ". Allows you grade assignments quicker.");
+
+		}
+		/*if(paUpgrade == 0)
 		{
 			if (money >= 150000)
 			{
@@ -236,11 +365,17 @@ function upgrade(option)
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle("paU","Costs $" + 150000*paUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
-		}
+		}*/
 	}
 	if(option == 3)
 	{
-		grUpgrade++;
+		if(rg.canUpgrade(money))
+		{
+			money-=rg.upgrade();
+			setTitle("grU","Costs $" + rg.nextUpgradeCost + ". Allows you grade assignments quicker.");
+
+		}
+		/*grUpgrade++;
 		if(grUpgrade == 0)
 		{
 			if (money >= 3000000)
@@ -262,7 +397,7 @@ function upgrade(option)
 				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle("grU","Costs $" + 3000000*grUpgrade*1.173 + ". Allows you grade assignments quicker.");
 			}
-		}
+		}*/
 	}
 }
 
@@ -272,15 +407,25 @@ function grade()
 {
     if (papersGraded == 0 && papersToGrade > 0)
     {
-        papersGraded++;
-        papersGraded += numTas;
-		papersGraded += numAssist*5;
-		papersGraded += numRobot*100;
-        setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-        papersToGrade--;
-		money++;
-        papersToGrade -= numEmployees;
-		money+=1;
+        
+		papersGraded+=bhUpgrade+1
+		
+        papersToGrade-=bhUpgrade+1;
+		var temp = papersToGrade;
+		if((temp-(bhUpgrade+1)>=0))
+			{
+				papersToGrade-=(bhUpgrade+1);
+				papersGraded+=(bhUpgrade+1);
+				money+=(bhUpgrade+1);
+				
+			}
+			else{
+				papersGraded+=papersToGrade;
+				money+=papersToGrade;
+				papersToGrade = 0;	
+			}
+
+
 		setDOM(salaryDom,("Brian has $" + money + "."));
     }
     else if (papersToGrade > 0)
@@ -302,17 +447,20 @@ function hire(x)
 
     if (x == 0)
     {
-
-		if(numTas==0)
+		if(ta.canPurchase(money))
+		{
+			money -= ta.purchase();
+		}
+		
+		/*if(numTas==0)
 		{
 			if (money >= 1000)
 			{
 				numEmployees++;
 				numTas++;
 				money -= 1000;
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
-				setTitle("ta","Costs $" + 1000*numTas*1.753 + ". Allows you to teach one more class.");
+				
+				setTitle("ta","Costs $" + 10000*numTas*1.753 + ". Allows you to teach one more class.");
 				overloadMax += 1;
 			}
 		}
@@ -328,13 +476,17 @@ function hire(x)
 				setTitle("ta","Costs $" + 10000*numTas*1.753 + ". Allows you to teach one more class.");
 				overloadMax += 1;
 			}
-		}
+		}*/
 
     }
     else if (x == 1)
     {
+		if(pa.canPurchase(money))
+		{
+		 money-=pa.purchase();	
+		}
 
-		if(numAssist==0)
+		/*if(numAssist==0)
 		{
 			 if (money >= 100000)
 			{
@@ -360,11 +512,15 @@ function hire(x)
 				setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes.");
 				overloadMax += 3;
 			}
-		}
+		}*/
     }
     else if (x == 2)
     {
-        if(numRobot==0)
+		if(rg.canPurchase(money))
+		{
+		 money-=rg.purchase();	
+		}
+        /*if(numRobot==0)
 		{
 			if (money >= 2000000)
 			{
@@ -386,15 +542,32 @@ function hire(x)
 				numRobot++;
 				money -= 2000000*numRobot*1.753;
 
-				setDOM(employeeDom, "Brian has " + numEmployees + " employees.");
-				setDOM(salaryDom,("Brian has $" + money + "."));
 				setTitle("rb","Costs $" + 2000000*numRobot*1.753 + ". Allows you to teach three more classes.");
 				overloadMax += 5;
 			}
-		}
+		}*/
     }
+	calculateOverload();
+	setDOM(employeeDom, "Brian has " + getNumEmployees() + " employees.");
+	setDOM(salaryDom,("Brian has $" + money + "."));
 }
 
+function getNumEmployees()
+{
+return bh.numChars + ta.numChars + pa.numChars + rg.numChars;	
+}
+
+function calculateOverload()
+{
+	var total = 3 + (ta.numChars*ta.overload) + (pa.numChars*ta.overload) + (rg.numChars*rg.overload);
+	this.overloadMax = total;
+}
+
+function calculateGradedPapers()
+{
+	var total = ta.currentNumAssignmentsThatCanBeDone + pa.currentNumAssignmentsThatCanBeDone + rg.currentNumAssignmentsThatCanBeDone;
+	return total;
+}
 
 function loop()
 {
@@ -423,47 +596,31 @@ function loop()
         if (frameCount % 30 == 0)
         {
             papersToGrade += numClasses;
+			var temp = papersToGrade;
+			if((temp-calculateGradedPapers())>=0)
+			{
+				papersToGrade-=calculateGradedPapers();
+				papersGraded+=calculateGradedPapers();
+				money+=calculateGradedPapers();
+				
+			}
+			else{
+				papersGraded+=papersToGrade;
+				money+=papersToGrade;
+				papersToGrade = 0;	
+			}
+			if(papersGraded>1)
+			{
+				setDOM(element, "Brian has graded " + papersGraded + " assignments.");
+			}
+			else if(papersGraded==1)
+			{
+				setDOM(element, "Brian has graded " + papersGraded + " assignment.");
 
+			}
+			
 
-            if(numEmployees > papersToGrade)
-            {
-                papersGraded += papersToGrade;
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade = 0;
-            }
-            else
-            {
-                papersGraded += numEmployees;
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade -= numEmployees;
-            }
-            //Assistants
-            if(numAssist*5 > papersToGrade)
-            {
-                papersGraded += papersToGrade;
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade = 0;
-            }
-            else
-            {
-                papersGraded += (numAssist*5);
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade -= (numAssist*5);
-            }
-            //Robots
-            if((numRobot*10) > papersToGrade)
-            {
-                papersGraded += papersToGrade;
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade = 0;
-            }
-            else
-            {
-                papersGraded += (numRobot*10);
-                setDOM(element, "Brian has graded " + papersGraded + " assignment.");
-                papersToGrade -= (numRobot*10);
-            }
-
+			setDOM(salaryDom,("Brian has $" + money + "."));
             calculatePapers();
         }
 
@@ -482,6 +639,7 @@ function loop()
 			{
 				isThursday = false;
 			}
+		calculatePapers();
 
     }, (1000 / 30));
 }
@@ -491,12 +649,10 @@ function calculatePapers()
 
      if (papersToGrade == 1)
         {
-            //element2.innerHTML = "Brian has " +  papersToGrade + " assignmet to grade.";
-            setDOM(element2, ("Brian has " +  papersToGrade + " assignments to grade."));
+            setDOM(element2, "Brian has " +  papersToGrade + " assignment to grade.");
         }
     else
         {
-            //element2.innerHTML = "Brian has " +  papersToGrade + " assignmets to grade.";
             setDOM(element2, "Brian has " +  papersToGrade + " assignments to grade.");
         }
 
@@ -530,3 +686,6 @@ function setTitle(type,string)
 {
 	document.getElementById(type).title = string;
 }
+
+
+
