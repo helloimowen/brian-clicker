@@ -512,7 +512,7 @@ if(x==1)
 {
 	if (money >= 100000*(numAssist)*1.753)
             {
-                multiple HireRefactor(100000,numAssist);
+                multipleHireRefactor(100000,numAssist);
                 numAssist++;
                 setTitle("pa","Costs $" + 100000*numAssist*1.753 + ". Allows you to teach three more classes.");
                 overloadMax += 3;
