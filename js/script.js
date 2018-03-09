@@ -75,6 +75,26 @@ function checkSave()
             }
 
 
+        numEmployees = parseInt(localStorage.getItem("numEmployees"));
+            
+        for (i = 0; i < numEmployees; i++)
+            {
+                item = "listOfEmployeeNames" + i; 
+                newthing = localStorage.getItem(item);
+                employees.name.push(newthing)
+
+                item = "listOfEmployeeLevels" + i; 
+                newthing = parseInt(localStorage.getItem(item));
+                employees.level.push(newthing)
+
+                item = "listOfEmployeePrices" + i; 
+                newthing = parseInt(localStorage.getItem(item));
+                employees.upCost.push(newthing)
+
+                loadEmployee(employees.name[i+1], employees.level[i+1], employees.upCost[i+1])
+            }
+
+
 
         numClasses = parseInt(localStorage.getItem("numClasses"));
         overloadMax = parseInt(localStorage.getItem("overloadMax"));
@@ -85,7 +105,7 @@ function checkSave()
         money = parseInt(localStorage.getItem("money"));
         currentDayOfTheWeek = localStorage.getItem("currentDayOfTheWeek");
         salary = parseInt(localStorage.getItem("salary"));
-        numEmployees = parseInt(localStorage.getItem("numEmployees"));
+        
         numAssist = parseInt(localStorage.getItem("numAssist"));
         numRobot = parseInt(localStorage.getItem("numRobot"));
         meeting = (localStorage.getItem("meeting") == 'true');
@@ -143,6 +163,20 @@ function save()
         localStorage.setItem(item, listOfClasses[i]);
     }
 
+
+    localStorage.setItem("numEmployees", numEmployees);
+
+    for (i = 0; i < numEmployees; i++) // doesn't save brian. Will add when upgrades are added. Unless it's past 10 because that's my bedtime and I care a lot about sleep. I hope you all understand. 
+    {
+        item = "listOfEmployeeNames" + i; 
+        localStorage.setItem(item, employees.name[i + 1]);
+        item = "listOfEmployeeLevels" + i; 
+        localStorage.setItem(item, employees.level[i + 1]);
+        item = "listOfEmployeePrices" + i; 
+        localStorage.setItem(item, employees.upCost[i + 1]);
+    }
+
+
     localStorage.setItem("listOfClasses", listOfClasses);
 
     localStorage.setItem("overloadMax", overloadMax);
@@ -154,7 +188,7 @@ function save()
     localStorage.setItem("money", money);
     localStorage.setItem("currentDayOfTheWeek", currentDayOfTheWeek);
     localStorage.setItem("salary", salary);
-    localStorage.setItem("numEmployees", numEmployees);
+
     localStorage.setItem("numAssist", numAssist);
     localStorage.setItem("numRobot", numRobot);  
     localStorage.setItem("meeting", meeting);
@@ -177,68 +211,67 @@ function reveal()
     //stressText
     //booksWriten 
 
-    if (papersGraded >= 10)
+    if (papersGraded >= 3)
     {
-        document.getElementById("papersGraded").style.visibility = "visible";
-        document.getElementById("papersGraded").style.animation = "fadein 10s";
+        fadein("papersGraded");
     }
 
-    if (money > 20)
+    if (money > 7)
     {
-        document.getElementById("money").style.visibility = "visible";
-        document.getElementById("money").style.animation = "fadein 10s";
+        fadein("money");
     }
     if (money > 1000)
     {
-        document.getElementById("ta").style.visibility = "visible";
-        document.getElementById("ta").style.animation = "fadein 10s";
-        document.getElementById("pa").style.visibility = "visible";
-        document.getElementById("pa").style.animation = "fadein 10s";
-        document.getElementById("rb").style.visibility = "visible";
-        document.getElementById("rb").style.animation = "fadein 10s";
+        fadein("ta");
+        fadein("pa");
+        fadein("rb");
+    }
+    if (money > 2000)
+    {
+        fadein("bhU");
+        fadein("taU");
+        fadein("paU");
+        fadein("rbU");
     }
     if (numEmployees >= 1)
     {
-        document.getElementById("numEmployee").style.visibility = "visible";
-        document.getElementById("numEmployee").style.animation = "fadein 10s";
+        fadein("numEmployee");
     }
 
     if(stressWidth >= 50)
     {
-        document.getElementById("stressBar").style.visibility = "visible";
-        document.getElementById("stressBar").style.animation = "fadein 10s";
-        document.getElementById("stressProgress").style.visibility = "visible";
-        document.getElementById("stressProgress").style.animation = "fadein 10s";
-        document.getElementById("stressText").style.visibility = "visible";
-        document.getElementById("stressText").style.animation = "fadein 10s";                
+        fadein("stressBar");
+        fadein("stressProgress");
+        fadein("stressText");
     }
 
     if(frameCount >= 4000)
     {
-        document.getElementById("myProgress").style.visibility = "visible";
-        document.getElementById("myProgress").style.animation = "fadein 10s";
-        document.getElementById("booksWritten").style.visibility = "visible";
-        document.getElementById("booksWritten").style.animation = "fadein 10s";
-        document.getElementById("myBar").style.visibility = "visible";
-        document.getElementById("myBar").style.animation = "fadein 10s"; 
-        document.getElementById("book").style.visibility = "visible";
-        document.getElementById("book").style.animation = "fadein 10s"; 
+        fadein("myProgress");
+        fadein("booksWritten");
+        fadein("myBar");
+        fadein("book");
     }
 
     if(numEmployees >= 1)
     {
-        document.getElementById("more").style.visibility = "visible";
-        document.getElementById("more").style.animation = "fadein 10s";
-        document.getElementById("less").style.visibility = "visible";
-        document.getElementById("less").style.animation = "fadein 10s";
+        fadein("more");
+        fadein("less");
+        fadein("employeeList");
     }
 
     if(numClasses > 1)
     {
-        document.getElementById("classList").style.visibility = "visible";
-        document.getElementById("classList").style.animation = "fadein 10s";
+        fadein("classList");
     }
 }
+
+function fadein(string) // lolrefactoring
+{
+    document.getElementById(string).style.visibility = "visible";
+    document.getElementById(string).style.animation = "fadein 10s";
+}
+
 
 var taUpgradeCost = 1500;
 var paUpgradeCost = 200000;
@@ -360,6 +393,22 @@ function generateEmployee()
 	'</br><button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div>';
 
 	empList.appendChild(junkNode);
+}
+
+function loadEmployee(name, level, cost)
+{
+    employees.name.push(name);
+    employees.level.push(level);
+    employees.upCost.push(cost);
+
+    var name = employees.name[numEmployees];
+    var level = employees.level[numEmployees];
+
+    var junkNode = document.createElement("LI");
+    junkNode.innerHTML = '<div class="employeeInside"><p>' + name + '</br>Lv. ' + level +
+    '</br><button class="upgrade" onclick="upgrade(0)">Upgrade</button></p></div>';
+
+    empList.appendChild(junkNode);
 }
 
 // END

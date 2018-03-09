@@ -62,11 +62,13 @@
       animation-timing-function: ease-in;
       animation: fadein 10s; 
     }
+
     #stressText, #booksWritten, 
     #ta, #pa, #rb, #money, 
     #numEmployee, #papersGraded, 
     #classList, #work, #book, 
-    #more, #less{
+    #more, #less, #bhU, #taU, 
+    #paU, #rbU, #employeeList {
         visibility: hidden;  
     }
 
@@ -93,7 +95,8 @@
 
 
 
-    .buttonGroup, .buttonGroup2, .buttonGroup3, .buttonGroup4 {
+    .buttonGroup, .buttonGroup2, 
+    .buttonGroup3, .buttonGroup4 {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
       width: 40%;
     }
@@ -139,13 +142,20 @@
         width: 100%;
     }
     .buttonGroup, .buttonGroup2, .buttonGroup3 {
-    
       width: 49%;
     }
     #stressProgress {
         width: 100%;
       }
 
+    ul#employeeList li {
+    text-align: center; 
+    display: block;
+    border: 1px solid grey;
+    float: left;
+    padding: 0px 0px;
+    font-size: 10px;
+    }
 
 
         .gradeButton{
@@ -165,11 +175,11 @@
     padding: 3px 3px;
     margin-left: 0;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
   ul#employeeList li{
     display: flex;
-    border: 2px solid grey;
     padding: 5px 10px;
   }
 
