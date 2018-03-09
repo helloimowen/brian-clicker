@@ -32,12 +32,7 @@
         color: white;
         visibility: hidden;
     }
-    #stressText{
-      visibility: hidden;
-    }
-    #booksWritten{
-      visibility: hidden;
-    }
+
     #myBar {
         width: 0%;
         height: 30px;
@@ -67,7 +62,11 @@
       animation-timing-function: ease-in;
       animation: fadein 10s; 
     }
-    #money, #numEmployee, #papersGraded, #classList, #work, #book, #more, #less{
+    #stressText, #booksWritten, 
+    #ta, #pa, #rb, #money, 
+    #numEmployee, #papersGraded, 
+    #classList, #work, #book, 
+    #more, #less{
         visibility: hidden;  
     }
 
@@ -85,9 +84,6 @@
       border: 1px solid grey;
 
     }
-    #ta, #pa, #rb{
-      visibility: hidden;
-    }
 
     .classInc{
       background-color: #f5827d;
@@ -97,7 +93,7 @@
 
 
 
-    .buttonGroup, .buttonGroup2, .buttonGroup3 {
+    .buttonGroup, .buttonGroup2, .buttonGroup3, .buttonGroup4 {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
       width: 40%;
     }
@@ -163,3 +159,28 @@
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
+  ul#employeeList {
+    list-style: none;
+    padding: 3px 3px;
+    margin-left: 0;
+    box-sizing: border-box;
+  }
+
+  ul#employeeList li{
+    display: flex;
+    border: 2px solid grey;
+    padding: 5px 10px;
+  }
+
+  #eList{
+
+  }
+
+    .upgrade{
+      border: none;
+      background-color: #82f5e8;
+      padding: 5px 5px;
+      border: 1px solid grey;
+
+    }
